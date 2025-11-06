@@ -1,21 +1,15 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/use-translation';
 
 export default function Footer() {
-  const [year, setYear] = useState(new Date().getFullYear());
   const { t } = useTranslation();
-
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
 
   return (
     <footer className="mt-20 py-10 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-6 text-center text-sm text-slate-400">
         <p>
-          &copy; {year} Queens Auto Service. All Rights Reserved. |{' '}
+          &copy; {new Date().getFullYear()} Queens Auto Service. All Rights Reserved. |{' '}
           <Link
             href="https://queensautoserviceselgin.com/privacy-policy/"
             target="_blank"
