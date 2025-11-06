@@ -17,7 +17,7 @@ export default function Footer() {
         <p>
           &copy; {year} Queens Auto Service. All Rights Reserved. |{' '}
           <Link
-            href="#"
+            href="https://queensautoserviceselgin.com/privacy-policy/"
             target="_blank"
             className="text-slate-300 hover:text-cyan-400 transition-colors"
           >
@@ -25,14 +25,14 @@ export default function Footer() {
           </Link>{' '}
           |{' '}
           <Link
-            href="#"
+            href="https://queensautoserviceselgin.com/terms-of-use/"
             target="_blank"
             className="text-slate-300 hover:text-cyan-400 transition-colors"
           >
             {t('termsOfUse')}
           </Link>
         </p>
-        <p className="mt-2">{t('address')}</p>
+        <p className="mt-2">1303 Dundee Ave, Elgin, IL 60120</p>
       </div>
     </footer>
   );

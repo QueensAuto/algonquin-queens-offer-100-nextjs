@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -13,7 +13,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
 import {
   ChevronLeft,
   ChevronRight,
@@ -65,13 +64,11 @@ export default function BookingForm() {
 
   const selectedDate = watch('date');
   const selectedTime = watch('time');
-  const yearOptions = Array.from({ length: new Date().getFullYear() - 1989 }, (_, i) => String(new Date().getFullYear() - i));
+  const yearOptions = Array.from({ length: new Date().getFullYear() + 1 - 1990 }, (_, i) => String(new Date().getFullYear() + 1 - i));
 
-  const availableTimes = () => {
+  const availableTimes = useCallback(() => {
     if (!selectedDate) return [];
-    const date = new Date(selectedDate);
-    date.setHours(0,0,0,0);
-    date.setDate(date.getDate() + 1); // Fix timezone offset issue
+    const date = new Date(selectedDate.replace(/-/g, '/'));
     const dayOfWeek = date.getDay();
     const now = new Date();
     
@@ -88,15 +85,36 @@ export default function BookingForm() {
       
       return timeSlotDate > now;
     });
-  }
+  }, [selectedDate]);
+
+  const smoothScrollToForm = () => {
+    const formElement = document.getElementById('form-container-wrapper');
+    const header = document.getElementById('site-header');
+    if (formElement) {
+        const headerHeight = header ? header.offsetHeight : 0;
+        const elementPosition = formElement.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerHeight - 20; // 20px buffer for spacing
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+  };
 
   const handleNext = async () => {
     const fieldsToValidate: (keyof FormData)[] = ['first-name', 'last-name', 'email', 'mobile-number', 'vehicle-year', 'vehicle-make', 'vehicle-model'];
     const isValid = await trigger(fieldsToValidate);
     if (isValid) {
       setStep(2);
+      smoothScrollToForm();
     }
   };
+
+  const handleBack = () => {
+    setStep(1);
+    smoothScrollToForm();
+  }
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -110,15 +128,58 @@ export default function BookingForm() {
       console.error("Booking failed");
     }
   };
-  
+
   const isStep1Valid =
     !errors['first-name'] && touchedFields['first-name'] &&
     !errors['last-name'] && touchedFields['last-name'] &&
     !errors.email && touchedFields.email &&
     !errors['mobile-number'] && touchedFields['mobile-number'] &&
-    !errors['vehicle-year'] &&
+    !!watch('vehicle-year') &&
     !errors['vehicle-make'] && touchedFields['vehicle-make'] &&
     !errors['vehicle-model'] && touchedFields['vehicle-model'];
+
+  const renderCalendar = useCallback(() => {
+    const month = currentMonth.getMonth();
+    const year = currentMonth.getFullYear();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const dayElements = [];
+
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        dayElements.push(<div key={`empty-${i}`}></div>);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const dayDate = new Date(year, month, i);
+        let classes = "calendar-day";
+        const formattedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
+        
+        if (dayDate < today || dayDate.getDay() === 0) classes += " disabled";
+        if (dayDate.getTime() === today.getTime()) classes += " today";
+        if (selectedDate === formattedDate) classes += " selected";
+
+        dayElements.push(
+            <div 
+                key={i} 
+                className={classes} 
+                data-date={formattedDate}
+                onClick={(e) => {
+                  const target = e.target as HTMLDivElement;
+                  if (target.classList.contains('disabled')) return;
+                  setValue('date', target.dataset.date || '', { shouldValidate: true });
+                  setValue('time', '', { shouldValidate: true });
+                }}
+            >
+                {i}
+            </div>
+        );
+    }
+    return dayElements;
+  }, [currentMonth, selectedDate, setValue]);
 
 
   if (step === 3 && submissionResult) {
@@ -163,7 +224,7 @@ export default function BookingForm() {
         <div className="bg-slate-950 shadow-inner shadow-black/20 rounded-[16px] p-6 sm:p-8 md:p-12">
           <div id="form-content">
             <div className="text-center">
-              <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-white font-headline">
+              <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
                 <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                   {t('formTitle')}
                 </span>
@@ -176,42 +237,41 @@ export default function BookingForm() {
               {step === 1 && (
                 <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {['first-name', 'last-name', 'email', 'mobile-number'].map(fieldName => {
-                            const key = fieldName as keyof FormData;
+                        {(['first-name', 'last-name', 'email', 'mobile-number'] as const).map(fieldName => {
                             return (
-                                <div key={key}>
-                                    <label htmlFor={key} className="block text-sm font-medium text-slate-300 mb-1">{t(key as any)}</label>
+                                <div key={fieldName} className="input-wrapper">
+                                    <label htmlFor={fieldName} className="block text-sm font-medium text-slate-300 mb-1">{t(fieldName)}</label>
                                     <div className="relative mt-1">
                                         <Controller
-                                            name={key}
+                                            name={fieldName}
                                             control={control}
                                             render={({ field }) => (
                                                 <Input
                                                     {...field}
-                                                    id={key}
-                                                    placeholder={t(`${key}Placeholder` as any)}
-                                                    className={`input-field ${errors[key] ? 'is-invalid' : touchedFields[key] ? 'is-valid' : ''}`}
+                                                    id={fieldName}
+                                                    placeholder={t(`${fieldName}Placeholder`)}
+                                                    className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${errors[fieldName] ? 'is-invalid' : touchedFields[fieldName] ? 'is-valid' : ''}`}
                                                 />
                                             )}
                                         />
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            {touchedFields[key] && !errors[key] && <CheckCircle className="h-5 w-5 text-green-500" />}
-                                            {errors[key] && <XCircle className="h-5 w-5 text-red-500" />}
+                                            {touchedFields[fieldName] && !errors[fieldName] && <CheckCircle className="validation-icon icon-valid h-5 w-5" />}
+                                            {errors[fieldName] && <XCircle className="validation-icon icon-invalid h-5 w-5" />}
                                         </div>
                                     </div>
-                                    {errors[key] && <p className="mt-1 text-xs text-red-400">{errors[key]?.message}</p>}
+                                    {errors[fieldName] && <p className="mt-1 text-xs text-red-400">{errors[fieldName]?.message}</p>}
                                 </div>
                             )
                         })}
                     </div>
                     <div className="pt-2">
-                        <h3 className="text-xl font-bold text-white mb-4 font-headline">{t('vehicleDetails')}</h3>
+                        <h3 className="text-xl font-bold text-white mb-4" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>{t('vehicleDetails')}</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('carYear')}</label>
                                 <Controller name="vehicle-year" control={control} render={({ field }) => (
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                        <SelectTrigger><SelectValue placeholder={t('selectYearPlaceholder')} /></SelectTrigger>
+                                        <SelectTrigger className="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:text-sm h-auto"><SelectValue placeholder={t('selectYearPlaceholder')} /></SelectTrigger>
                                         <SelectContent>
                                             {yearOptions.map(year => <SelectItem key={year} value={year}>{year}</SelectItem>)}
                                         </SelectContent>
@@ -219,28 +279,27 @@ export default function BookingForm() {
                                 )}/>
                                 {errors['vehicle-year'] && <p className="mt-1 text-xs text-red-400">{errors['vehicle-year']?.message}</p>}
                             </div>
-                            {['vehicle-make', 'vehicle-model'].map(fieldName => {
-                                const key = fieldName as keyof FormData;
+                            {(['vehicle-make', 'vehicle-model'] as const).map(fieldName => {
                                 return (
-                                <div key={key}>
-                                    <label htmlFor={key} className="block text-sm font-medium text-slate-300 mb-1">{t(key as any)}</label>
+                                <div key={fieldName} className="input-wrapper">
+                                    <label htmlFor={fieldName} className="block text-sm font-medium text-slate-300 mb-1">{t(fieldName)}</label>
                                     <div className="relative mt-1">
-                                        <Controller name={key} control={control} render={({ field }) => (
-                                            <Input {...field} id={key} placeholder={t(`${key}Placeholder` as any)} className={`input-field ${errors[key] ? 'is-invalid' : touchedFields[key] ? 'is-valid' : ''}`}/>
+                                        <Controller name={fieldName} control={control} render={({ field }) => (
+                                            <Input {...field} id={fieldName} placeholder={t(`${fieldName}Placeholder`)} className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${errors[fieldName] ? 'is-invalid' : touchedFields[fieldName] ? 'is-valid' : ''}`}/>
                                         )}/>
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            {touchedFields[key] && !errors[key] && <CheckCircle className="h-5 w-5 text-green-500" />}
-                                            {errors[key] && <XCircle className="h-5 w-5 text-red-500" />}
+                                            {touchedFields[fieldName] && !errors[fieldName] && <CheckCircle className="validation-icon icon-valid h-5 w-5" />}
+                                            {errors[fieldName] && <XCircle className="validation-icon icon-invalid h-5 w-5" />}
                                         </div>
                                     </div>
-                                    {errors[key] && <p className="mt-1 text-xs text-red-400">{errors[key]?.message}</p>}
+                                    {errors[fieldName] && <p className="mt-1 text-xs text-red-400">{errors[fieldName]?.message}</p>}
                                 </div>
                                 )
                             })}
                         </div>
                     </div>
                     <div className="mt-8 text-center">
-                        <Button type="button" onClick={handleNext} disabled={!isStep1Valid} className="w-full cta-button h-auto px-8 py-4 text-lg font-bold">
+                        <Button type="button" onClick={handleNext} disabled={!isStep1Valid} className="w-full cta-button h-auto px-8 py-4 text-lg font-bold rounded-full">
                             {t('nextBtn')} &rarr;
                         </Button>
                         <p className="mt-2 text-xs text-slate-400">{t('ctaUrgency')}</p>
@@ -250,29 +309,25 @@ export default function BookingForm() {
               {step === 2 && (
                  <div className="space-y-8">
                      <div>
-                        <h3 className="text-xl font-bold text-white mb-4 font-headline">{t('whenBringIn')}</h3>
-                        <div className="bg-slate-800/50 p-4 rounded-lg">
-                           <Controller name="date" control={control} render={({ field }) => (
-                                <Calendar
-                                    mode="single"
-                                    selected={field.value ? new Date(field.value) : undefined}
-                                    onSelect={(day) => field.onChange(day?.toISOString().split('T')[0])}
-                                    month={currentMonth}
-                                    onMonthChange={setCurrentMonth}
-                                    disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1)) || date.getDay() === 0}
-                                    className="p-0"
-                                    components={{
-                                        IconLeft: () => <ChevronLeft className="h-6 w-6" />,
-                                        IconRight: () => <ChevronRight className="h-6 w-6" />,
-                                    }}
-                                />
-                            )}/>
+                        <h3 className="text-xl font-bold text-white mb-4" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>{t('whenBringIn')}</h3>
+                        <div className="bg-slate-800/50 p-6 rounded-lg shadow-lg w-full">
+                           <div className="flex items-center justify-between mb-6">
+                               <Button type="button" variant="ghost" onClick={() => setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() -1, 1))} className="p-2 rounded-full hover:bg-slate-700 transition-colors"><ChevronLeft className="w-6 h-6 text-slate-400" /></Button>
+                               <h3 className="text-xl font-semibold text-white">{currentMonth.toLocaleString( 'default', { month: 'long', year: 'numeric' })}</h3>
+                               <Button type="button" variant="ghost" onClick={() => setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1))} className="p-2 rounded-full hover:bg-slate-700 transition-colors"><ChevronRight className="w-6 h-6 text-slate-400" /></Button>
+                           </div>
+                           <div className="grid grid-cols-7 gap-1 text-center font-semibold text-slate-400 text-xs py-2">
+                               {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d=><div key={d}>{d}</div>)}
+                           </div>
+                           <div className="grid grid-cols-7 gap-2 text-center mt-2">
+                               {renderCalendar()}
+                           </div>
                         </div>
                         {errors.date && <p className="mt-1 text-xs text-red-400">{errors.date.message}</p>}
                      </div>
 
                      {selectedDate && availableTimes().length > 0 && (
-                        <div>
+                        <div id="time-slot-container">
                           <h4 className="text-lg font-semibold text-white mb-4">{t('availableTimes')}</h4>
                           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                             {availableTimes().map(time => (
@@ -281,7 +336,7 @@ export default function BookingForm() {
                                   type="button"
                                   variant={selectedTime === time ? 'default' : 'outline'}
                                   onClick={() => setValue('time', time, { shouldValidate: true })}
-                                  className={`time-slot transition-colors duration-200 ${selectedTime === time ? 'bg-cyan-500 border-cyan-500 text-white' : 'border-slate-600 hover:bg-slate-700'}`}
+                                  className={`time-slot p-2 border rounded-md transition-colors duration-200 hover:bg-slate-700 ${selectedTime === time ? 'selected' : 'border-slate-600 text-slate-200'}`}
                                 >
                                   {time}
                                 </Button>
@@ -292,15 +347,15 @@ export default function BookingForm() {
                      )}
 
                      {selectedDate && availableTimes().length === 0 && (
-                       <p className="text-slate-400 text-center">{t('noTimesAvailable')}</p>
+                       <p className="text-slate-400 text-center col-span-full">{t('noTimesAvailable')}</p>
                      )}
 
                     <div className="mt-8 text-center">
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Button type="button" variant="ghost" onClick={() => setStep(1)} className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-slate-300 hover:bg-slate-800">
+                            <Button type="button" variant="ghost" onClick={handleBack} className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-slate-300 rounded-full hover:bg-slate-800 transition-colors">
                                 &larr; {t('backBtn')}
                             </Button>
-                            <Button type="submit" disabled={isSubmitting || !selectedTime} className="w-full sm:w-auto cta-button h-auto px-8 py-4 text-xl font-bold">
+                            <Button type="submit" disabled={isSubmitting || !selectedTime} className="w-full sm:w-auto cta-button inline-flex items-center justify-center h-auto px-8 py-4 text-xl font-bold rounded-full">
                                 {isSubmitting && <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5" />}
                                 {isSubmitting ? t('submitBtnLoading') : t('submitBtn')}
                             </Button>

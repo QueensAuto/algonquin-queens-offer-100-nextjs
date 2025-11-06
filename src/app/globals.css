@@ -93,18 +93,18 @@ body {
 
 @layer utilities {
   .cta-button {
-    @apply bg-gradient-to-r from-cyan-400 to-blue-600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: linear-gradient(to right, #22d3ee, #3b82f6 60%);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .cta-button:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px -5px rgba(34, 197, 222, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -5px rgba(34, 197, 222, 0.3);
   }
   .faq-icon {
-    transition: transform 0.3s ease;
+      transition: transform 0.3s ease;
   }
   details[open] .faq-icon {
-    transform: rotate(180deg);
+      transform: rotate(180deg);
   }
   
   @keyframes blob-anim {
@@ -113,13 +113,13 @@ body {
   }
 
   .bonus-card .icon-wrapper {
-    background-color: #1e293b; /* slate-800 */
-    transition: background-color 0.5s ease-in-out;
+      background-color: #1e293b; /* slate-800 */
+      transition: background-color 0.5s ease-in-out;
   }
   .bonus-card .icon-wrapper .lucide {
-    color: #94a3b8; /* slate-400 */
-    transition: color 0.5s ease-in-out, transform 0.3s ease;
-    transform: scale(1);
+      color: #94a3b8; /* slate-400 */
+      transition: color 0.5s ease-in-out, transform 0.3s ease;
+      transform: scale(1);
   }
   .bonus-card:hover .icon-wrapper .lucide {
      color: #22d3ee; /* cyan-400 */
@@ -154,4 +154,43 @@ body {
       position: relative;
       z-index: 1;
   }
+  .calendar-day {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: background-color 0.2s, color 0.2s;
+  }
+  .calendar-day:hover:not(.disabled):not(.selected) {
+      background-color: #334155;
+  }
+  .calendar-day.selected {
+      background-color: #22d3ee;
+      color: white;
+      font-weight: bold;
+  }
+  .calendar-day.today {
+      background-color: rgba(37, 99, 235, 0.3);
+  }
+  .calendar-day.disabled {
+      color: #475569;
+      cursor: not-allowed;
+  }
+  .time-slot.selected {
+      background-color: #22d3ee;
+      color: white;
+      border-color: #22d3ee;
+  }
+
+  input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+  input[type=range]:focus { outline: none; }
+  input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #1e293b; border-radius: 5px; border: 1px solid #334155; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%; background: white; cursor: pointer; margin-top: -11px; border: 4px solid #3b82f6; box-shadow: 0 0 10px #3b82f6; }
+  input[type=range]::-moz-range-track { width: 100%; height: 8px; cursor: pointer; background: #1e293b; border-radius: 5px; border: 1px solid #334155; }
+  input[type=range]::-moz-range-thumb { height: 20px; width: 20px; border-radius: 50%; background: white; cursor: pointer; border: 4px solid #3b82f6; box-shadow: 0 0 10px #3b82f6; }
+  
 }

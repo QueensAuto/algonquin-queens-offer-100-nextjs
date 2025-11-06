@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/language-context';
 import { useTranslation } from '@/hooks/use-translation';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Header() {
   const { language, setLanguage } = useLanguage();
@@ -13,8 +12,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
-
-  const logoImage = PlaceHolderImages.find((img) => img.id === 'logo');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +26,23 @@ export default function Header() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const progressEl = document.getElementById('scroll-progress');
+    const updateScrollProgress = () => {
+        const h = document.documentElement;
+        const st = h.scrollTop || document.body.scrollTop;
+        const sh = h.scrollHeight - h.clientHeight;
+        if (progressEl) {
+            progressEl.style.width = (sh ? (st / sh) * 100 : 0) + '%';
+        }
+    }
+    window.addEventListener('scroll', updateScrollProgress);
+
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', updateScrollProgress);
+    }
   }, [lastY]);
 
   const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -42,11 +55,7 @@ export default function Header() {
 
   return (
     <>
-      <div
-        id="scroll-progress"
-        className="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-400 to-purple-400 z-[60]"
-        style={{ width: scrolled ? '100%' : '0%', transition: 'width 0.1s linear' }}
-      />
+      <div id="scroll-progress" className="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-400 to-purple-400 z-[60]" style={{width: '0%'}}/>
       <header
         id="site-header"
         className={`fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-black/70 border-b transition-all duration-300 will-change-transform ${
@@ -56,16 +65,18 @@ export default function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16">
           <div className="h-full flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-md">
-              {logoImage && (
-                <Image
-                  src={logoImage.imageUrl}
-                  alt="Queens Auto Services Logo"
-                  width={160}
-                  height={40}
-                  className="h-10 w-auto"
-                  data-ai-hint={logoImage.imageHint}
-                />
-              )}
+              <Image
+                src="https://queensautoserviceselgin.com/wp-content/uploads/2024/11/Logo-White.webp"
+                alt="Queens Auto Services Logo"
+                width={160}
+                height={40}
+                className="h-10 w-auto"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null; 
+                  target.src='https://placehold.co/200x50/0f172a/ffffff?text=Logo';
+                }}
+              />
             </Link>
             <div className="flex items-center gap-4">
               <div className="text-sm">

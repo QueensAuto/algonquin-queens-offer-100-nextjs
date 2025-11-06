@@ -26,12 +26,20 @@ export default function Testimonials() {
   return (
     <section className="py-24 px-4" itemScope itemType="http://schema.org/AutoRepair">
       <meta itemProp="name" content="Queens Auto Service" />
+      <meta itemProp="image" content="https://queensautoserviceselgin.com/wp-content/uploads/2024/11/Logo-White.webp" />
+      <meta itemProp="telephone" content="+1-224-635-3000" />
+      <address itemProp="address" itemScope itemType="http://schema.org/PostalAddress" className="hidden">
+        <span itemProp="streetAddress">1303 Dundee Ave</span>,
+        <span itemProp="addressLocality">Elgin</span>,
+        <span itemProp="addressRegion">IL</span>
+        <span itemProp="postalCode">60120</span>
+      </address>
       <div itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating" className="hidden">
         <meta itemProp="ratingValue" content="4.9" />
         <meta itemProp="reviewCount" content="52" />
       </div>
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-center text-white font-headline">
+        <h2 className="text-4xl font-extrabold text-center text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
           {t('testimonialsTitle')}
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-center text-slate-400">
@@ -47,8 +55,8 @@ export default function Testimonials() {
                 <QuoteIcon />
               </div>
               <div className="relative z-10 flex flex-col flex-grow">
-                <p className="text-base text-slate-300 leading-relaxed flex-grow">
-                  {review.text}
+                 <p className="text-base text-slate-300 leading-relaxed flex-grow">
+                  {review.text.length > 150 ? review.text.substring(0, 150) + "..." : review.text}
                 </p>
               </div>
               <div className="relative z-10 flex items-center mt-6 pt-6 border-t border-slate-800">
@@ -67,7 +75,7 @@ export default function Testimonials() {
           <div className="mt-12 text-center">
             <Button
               onClick={showMoreReviews}
-              className="w-full sm:w-auto px-8 py-3 bg-slate-700 text-white font-semibold rounded-full shadow-lg hover:bg-slate-600 h-auto"
+              className="w-full sm:w-auto px-8 py-3 bg-slate-700 text-white font-semibold rounded-full shadow-lg hover:bg-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-500 focus:ring-opacity-50 transition-all duration-300 h-auto"
             >
               {t('loadMore')}
             </Button>

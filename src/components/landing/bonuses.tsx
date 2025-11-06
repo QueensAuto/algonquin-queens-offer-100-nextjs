@@ -15,7 +15,7 @@ export default function Bonuses() {
   return (
     <section className="py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl lg:text-5xl font-extrabold text-white font-headline">
+        <h2 className="text-4xl lg:text-5xl font-extrabold text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
           <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             {t('bonusStackTitle')}
           </span>
@@ -28,7 +28,7 @@ export default function Bonuses() {
             {bonusData.map((bonus, index) => (
               <div
                 key={index}
-                className="bonus-card flex flex-col items-center p-8 text-center bg-slate-950 border border-slate-800 rounded-2xl transition-all duration-300 hover:border-cyan-500 hover:-translate-y-2 w-full sm:w-[45%] lg:w-[30%]"
+                className="bonus-card flex flex-col items-center p-8 text-center bg-black-950 border border-slate-900 rounded-2xl transition-all duration-300 hover:border-cyan-500 hover:-translate-y-2 w-full sm:w-[45%] lg:w-[30%]"
               >
                 <div className="icon-wrapper flex items-center justify-center w-16 h-16 rounded-full">
                   <bonus.icon className="w-8 h-8" />

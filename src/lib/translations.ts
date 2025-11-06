@@ -4,12 +4,12 @@ export const translations = {
     heroTitlePre: 'Save Up to $100',
     heroTitlePost: 'on Your Next Auto Repair',
     heroSubtitle: 'Book online to get an instant savings code. The more you spend, the more you save.',
-    heroOffer: 'Exclusive Online Offer',
+    heroOffer: '<i data-lucide="sparkles" class="inline-block w-4 h-4 mr-1"></i> Exclusive Online Offer',
     heroCTA: 'GET MY SAVINGS NOW',
     ctaUrgency: 'Exclusive Online Offer – Valid This Month Only',
     
     savingsScaleTitle: 'Your Repair Savings Scale',
-    dragSlider: "Move the slider to see how much YOU could save.",
+    dragSlider: "Drag the slider to see how much you\'ll save.",
     repairCost: 'Repair Cost',
     youSave: 'You Save',
     finalCost: 'Final Cost',
@@ -20,18 +20,14 @@ export const translations = {
 
     couponTitle: 'What Repairs Can You Use This Coupon For?',
     couponSubtitle: 'This discount applies to most of the repair work we do here at Queens Auto. That means you can save big on services like:',
-    couponList1: [
-      'Brake repairs & replacements',
-      'Suspension & steering work',
-      'Engine diagnostics & tune-ups',
-      'Batteries, alternators & starters',
-    ],
-    couponList2: [
-      'Heating & A/C repairs',
-      'Belts, hoses & spark plugs',
-      'Electrical diagnostics',
-      'Fluid flushes & maintenance',
-    ],
+    couponList1: `<li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Brake repairs & replacements</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Suspension & steering work</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Engine diagnostics & tune-ups</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Batteries, alternators & starters</li>`,
+    couponList2: `<li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Heating & A/C repairs</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Belts, hoses & spark plugs</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Electrical diagnostics</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Fluid flushes & maintenance</li>`,
     couponExclusions: '<strong>Not included:</strong> Tires, oil changes, and state inspections.',
 
     bonusStackTitle: 'Your Repair Comes With These FREE Bonuses',
@@ -91,14 +87,14 @@ export const translations = {
 
 
     testimonialsTitle: 'Trusted by Elgin Drivers',
-    testimonialsSubtitle: 'Rated 4.9/5 Stars by 25,000+ customers who won’t go anywhere else.',
+    testimonialsSubtitle: 'See why 25,000+ customers won’t go anywhere else.',
     loadMore: 'Load More Reviews',
     
     aboutUs: 'About Us',
     aboutTitle: 'Driven by Passion for Cars — and Care for People.',
-    aboutBody: 'We’re not a big chain — we’re your neighborhood shop built on trust and a passion for what we do. Every car is treated like family, and every customer drives away knowing they got real value.',
+    aboutBody: 'At Queens Auto, we’re not a big chain — we’re a neighborhood shop built on trust, transparency, and true passion for what we do. Every car that comes through our doors gets treated like family, and every customer drives out knowing they got real value — not gimmicks.',
     aboutTagline: 'Real people. Real service. We fix the car — and the stress.',
-    address: '1303 Dundee Ave, Elgin, IL 60120',
+    address: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block lucide lucide-map-pin mr-2 h-4 w-4 text-cyan-400"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>1303 Dundee Ave, 2 blocks from I-90, Elgin',
     
     faqTitle: 'Frequently Asked Questions',
     faqQ1: 'How does the “Up to $100 Off” offer work?',
@@ -129,14 +125,14 @@ export const translations = {
     popupBonus3: 'Free Brake & Tire Safety Check ($39 Value)',
     popupBonus4: 'Roadside Assistance Included ($59 Value)',
     popupBonus5: '2-Year/24k Nationwide Warranty',
-    popupCTAV2: 'Claim My Repair Package',
+    popupCTAV2: 'Claim My Repair Package →',
   },
   es: {
     bookNowNav: 'Reservar Ahora',
     heroTitlePre: 'Ahorra Hasta $100',
     heroTitlePost: 'en tu Próxima Reparación',
     heroSubtitle: 'Reserva en línea para obtener un código de ahorro al instante. Cuanto más gastas, más ahorras.',
-    heroOffer: 'Oferta Exclusiva en Línea',
+    heroOffer: '<i data-lucide="sparkles" class="inline-block w-4 h-4 mr-1"></i> Oferta Exclusiva en Línea',
     heroCTA: 'OBTENER MIS AHORROS AHORA',
     ctaUrgency: 'Oferta Exclusiva en Línea – Válida Solo Este Mes',
     
@@ -152,18 +148,14 @@ export const translations = {
 
     couponTitle: '¿En Qué Reparaciones Puedes Usar Este Cupón?',
     couponSubtitle: 'Este descuento se aplica a la mayoría de los trabajos de reparación que hacemos en Queens Auto. Eso significa que puedes ahorrar en grande en servicios como:',
-    couponList1: [
-      'Reparación y reemplazo de frenos',
-      'Trabajos de suspensión y dirección',
-      'Diagnóstico de motor y afinaciones',
-      'Baterías, alternadores y arranques',
-    ],
-    couponList2: [
-      'Reparaciones de calefacción y A/C',
-      'Correas, mangueras y bujías',
-      'Diagnóstico eléctrico',
-      'Lavado de fluidos y mantenimiento',
-    ],
+    couponList1: `<li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Reparación y reemplazo de frenos</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Trabajos de suspensión y dirección</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Diagnóstico de motor y afinaciones</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Baterías, alternadores y arranques</li>`,
+    couponList2: `<li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Reparaciones de calefacción y A/C</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Correas, mangueras y bujías</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Diagnóstico eléctrico</li>
+                  <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Lavado de fluidos y mantenimiento</li>`,
     couponExclusions: '<strong>No incluido:</strong> Llantas, cambios de aceite e inspecciones estatales.',
 
     bonusStackTitle: 'Tu Reparación Viene Con Bonos GRATIS',
@@ -222,28 +214,28 @@ export const translations = {
     couponCodeInstruction: "Aquí está tu código de ahorro exclusivo. Muéstralo en el taller para obtener tu descuento:",
 
     testimonialsTitle: 'Con la Confianza de los Conductores de Elgin',
-    testimonialsSubtitle: 'Calificado 4.9/5 Estrellas por más de 25,000 clientes que no van a ningún otro lado.',
+    testimonialsSubtitle: 'Descubre por qué más de 25,000 clientes no van a ningún otro lado.',
     loadMore: 'Cargar Más Reseñas',
 
     aboutUs: 'Sobre Nosotros',
     aboutTitle: 'Impulsados por la Pasión por los Autos — y el Cuidado por las Personas.',
-    aboutBody: 'No somos una gran cadena — somos tu taller de barrio construido sobre la confianza y la pasión por lo que hacemos. Cada auto es tratado como de la familia, y cada cliente se va sabiendo que obtuvo valor real.',
+    aboutBody: 'En Queens Auto, no somos una gran cadena — somos un taller de barrio construido sobre la confianza, la transparencia y la verdadera pasión por lo que hacemos. Cada auto es tratado como de la familia.',
     aboutTagline: 'Gente real. Servicio real. Arreglamos el auto y el estrés.',
-    address: '1303 Dundee Ave, Elgin, IL 60120',
+    address: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block lucide lucide-map-pin mr-2 h-4 w-4 text-cyan-400"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>1303 Dundee Ave, a 2 cuadras de la I-90, Elgin',
 
     faqTitle: 'Preguntas Frecuentes',
     faqQ1: '¿Cómo funciona la oferta de “Hasta $100 de Descuento”?',
     faqA1: 'Es un sistema por niveles: Gasta $100, ahorra $15. Gasta $200, ahorra $30. Gasta $300, ahorra $40. Gasta $500, ahorra $50. Gasta $700 o más, ahorra el máximo de $100.',
-    faqQ2: '¿Qué pasa si tienen una mejor oferta en frenos o alineación?',
-    faqA2: 'Siempre obtendrás la mejor oferta que tengamos. Si una oferta especial te ahorra más, te daremos esa. Los descuentos no se acumulan, pero nos aseguramos de que siempre salgas ganando.',
-    faqQ3: '¿Puedo combinar esto con otros cupones?',
-    faqA3: 'No, esta oferta no se puede combinar con otras promociones. Siempre aplicamos el descuento que más te ahorre.',
+    faqQ2: '¿Qué pasa si tienen una mejor oferta en frenos o alineación de ruedas?',
+    faqA2: 'Siempre obtendrás la mejor oferta que tengamos. Si una oferta especial de frenos o alineación te ahorra más que este cupón, te daremos esa oferta en su lugar. Los descuentos no se acumulan, pero nos aseguramos de que siempre salgas ganando.',
+    faqQ3: '¿Puedo combinar esto con otros cupones u ofertas de financiamiento?',
+    faqA3: 'No, esta oferta no se puede combinar con otras promociones, cupones o financiamientos especiales. Siempre aplicamos el descuento que más te ahorre.',
     faqQ4: '¿Funciona para citas en línea y en la tienda?',
-    faqA4: 'Sí. Reclama tus ahorros en línea aquí, y luego trae tu vehículo. Solo menciona tu cupón al registrarte.',
-
+    faqA4: 'Sí. Reclama tus ahorros en línea aquí, y luego trae tu vehículo para el servicio. Solo menciona tu cupón cuando te registres en Queens Auto Service.',
+    
     serviceAreaTitle: 'Sirviendo con Orgullo a Elgin y sus Alrededores',
     serviceAreaSubtitle: 'Tu código de ahorro es válido en nuestra conveniente ubicación de Elgin.',
-    serviceAreaList: 'Incluyendo Elgin, South Elgin, West Dundee, Sleepy Hollow, Gilberts, Streamwood, y Bartlett.',
+    serviceAreaList: 'Incluyendo Elgin, South Elgin, West Dundee, Sleepy Hollow, Gilberts, Streamwood y Bartlett.',
 
     privacyPolicy: 'Política de Privacidad',
     termsOfUse: 'Términos de Uso',
@@ -252,14 +244,14 @@ export const translations = {
     modalP1: 'Hasta $100 de DCTO. $15 de DCTO en $100, $30 en $200, $40 en $300, $50 en $500, $100 en $700+. Máximo $100.',
     modalP2: 'Excluye llantas e inspecciones estatales. Los cambios de aceite cuentan para el gasto pero no tienen descuento.',
     modalP3: 'No se puede combinar con otras ofertas. Válido en Queens Auto Service.',
-
+    
     popupTitleV2: '¡Espera! No te pierdas este paquete de reparación',
     popupSubtitleV2: 'Obtén tu Descuento por Nivel + $150 en Bonos Gratis al Reservar Hoy.',
-    popupBonus1: 'Ahorros por Nivel: $15 de DCTO en $100+ | $50 en $500+ | $100 en $700+',
+    popupBonus1: 'Ahorros por Nivel: $15 de DCTO en $100+ | $50 de DCTO en $500+ | $100 de DCTO en $700+',
     popupBonus2: 'Inspección Vehicular Gratuita ($79 Valor)',
     popupBonus3: 'Revisión de Seguridad de Frenos y Llantas Gratuita ($39 Valor)',
     popupBonus4: 'Asistencia en Carretera Incluida ($59 Valor)',
     popupBonus5: 'Garantía Nacional de 2 Años/24k Millas',
-    popupCTAV2: 'Reclamar Mi Paquete',
+    popupCTAV2: 'Reclamar Mi Paquete →',
   },
 };

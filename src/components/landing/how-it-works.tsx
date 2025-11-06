@@ -13,7 +13,7 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 px-4">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl font-extrabold text-white font-headline">
+        <h2 className="text-4xl font-extrabold text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
           {t('howItWorksTitle')}
         </h2>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -8,23 +8,56 @@ export default function StickyCta() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // If hero is NOT intersecting (i.e., scrolled past), show sticky CTA
-        setVisible(!entry.isIntersecting);
-      },
-      { rootMargin: "-200px 0px 0px 0px" } // trigger when hero is 200px off screen from top
-    );
-
     const heroSection = document.getElementById('hero-section');
-    if (heroSection) {
-      observer.observe(heroSection);
-    }
+    const scaleSection = document.getElementById('scale-section');
+    const formSection = document.getElementById('book-appointment-form');
+    const footer = document.querySelector('footer');
+
+    if (!heroSection || !scaleSection || !formSection || !footer) return;
+    
+    let heroIsVisible = false;
+    let scaleIsVisible = false;
+    let formIsVisible = false;
+    let footerIsVisible = false;
+
+    const showStickyCta = () => {
+        if (!heroIsVisible && !scaleIsVisible && !formIsVisible && !footerIsVisible) {
+            setVisible(true);
+        } else {
+            setVisible(false);
+        }
+    };
+
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.target.id === 'hero-section') {
+                heroIsVisible = entry.isIntersecting;
+            }
+            if (entry.target.id === 'scale-section') {
+                scaleIsVisible = entry.isIntersecting;
+            }
+            if (entry.target.id === 'book-appointment-form') {
+                formIsVisible = entry.isIntersecting;
+            }
+            if (entry.target.tagName === 'FOOTER') {
+                footerIsVisible = entry.isIntersecting;
+            }
+        });
+        showStickyCta();
+    }, {
+        root: null,
+        threshold: 0.1
+    });
+
+    observer.observe(heroSection);
+    observer.observe(scaleSection);
+    observer.observe(formSection);
+    observer.observe(footer);
+
 
     return () => {
-      if (heroSection) {
-        observer.unobserve(heroSection);
-      }
+        observer.disconnect();
     };
   }, []);
 
@@ -38,7 +71,7 @@ export default function StickyCta() {
 
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 p-4 flex justify-center pointer-events-none">
+    <div className="lg:hidden fixed bottom-6 left-0 right-0 z-40 flex justify-center pointer-events-none">
       <a
         href="#book-appointment-form"
         onClick={scrollToForm}

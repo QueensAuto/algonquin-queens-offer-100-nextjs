@@ -22,10 +22,10 @@ export default function Hero() {
       <Script src="https://fast.wistia.com/player.js" async />
       <section
         id="hero-section"
-        className="relative text-center pt-28 pb-20 sm:pt-32 sm:pb-24 px-4"
+        className="relative text-center pt-28 pb-20 sm:pt-24 sm:pb-20 px-4"
       >
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white font-headline">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               {t('heroTitlePre')}
             </span>{' '}
@@ -34,9 +34,7 @@ export default function Hero() {
           <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
             {t('heroSubtitle')}
           </p>
-          <p className="mt-4 text-base text-cyan-400 font-semibold max-w-2xl mx-auto flex items-center justify-center gap-2">
-            <Sparkles className="inline-block w-4 h-4" />{' '}
-            {t('heroOffer')}
+          <p className="mt-4 text-base text-cyan-400 font-semibold max-w-2xl mx-auto flex items-center justify-center gap-2" dangerouslySetInnerHTML={{ __html: t('heroOffer') || '' }}>
           </p>
 
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">

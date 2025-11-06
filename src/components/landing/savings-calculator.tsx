@@ -1,7 +1,6 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from '@/hooks/use-translation';
-import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { generateSavingsSuggestions } from '@/app/actions';
 import { WandSparkles } from 'lucide-react';
@@ -17,16 +16,47 @@ export default function SavingsCalculator({ onDetailsClick }: SavingsCalculatorP
   const [suggestions, setSuggestions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const savingsTiers = useMemo(() => [
+      { min: 700, max: Infinity, discount: 100 },
+      { min: 500, max: 699, discount: 50 },
+      { min: 300, max: 499, discount: 40 },
+      { min: 200, max: 299, discount: 30 },
+      { min: 100, max: 199, discount: 15 },
+      { min: 0, max: 99, discount: 0 }
+  ], []);
+
   const savings = useMemo(() => {
-    if (cost >= 700) return 100;
-    if (cost >= 500) return 50;
-    if (cost >= 300) return 40;
-    if (cost >= 200) return 30;
-    if (cost >= 100) return 15;
-    return 0;
-  }, [cost]);
+    const tier = savingsTiers.find(t => cost >= t.min && cost <= t.max);
+    return tier ? tier.discount : 0;
+  }, [cost, savingsTiers]);
 
   const finalCost = cost - savings;
+  
+  const animateValue = (el: HTMLElement | null, start: number, end: number, duration: number) => {
+      if (!el) return;
+      let startTimestamp: number | null = null;
+      const step = (timestamp: number) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          el.textContent = `$${Math.floor(progress * (end - start) + start)}`;
+          if (progress < 1) window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
+  };
+
+  useEffect(() => {
+    const repairCostEl = document.getElementById('repair-cost');
+    const savingsAmountEl = document.getElementById('savings-amount');
+    const finalCostEl = document.getElementById('final-cost');
+    
+    const currentRepairCost = parseInt(repairCostEl?.textContent?.replace('$', '') || '0');
+    const currentSavingsAmount = parseInt(savingsAmountEl?.textContent?.replace('$', '') || '0');
+    const currentFinalCost = parseInt(finalCostEl?.textContent?.replace('$', '') || '0');
+    
+    animateValue(repairCostEl, currentRepairCost, cost, 300);
+    animateValue(savingsAmountEl, currentSavingsAmount, savings, 300);
+    animateValue(finalCostEl, currentFinalCost, finalCost, 300);
+  }, [cost, savings, finalCost]);
 
   const handleSuggestion = async () => {
     setIsLoading(true);
@@ -39,21 +69,24 @@ export default function SavingsCalculator({ onDetailsClick }: SavingsCalculatorP
   };
 
   return (
-    <section id="scale-section" className="py-16">
+    <section id="scale-section" className="py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-white mb-4 font-headline">
+        <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-white mb-4" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
           <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             {t('savingsScaleTitle')}
           </span>
         </h2>
         <p className="text-lg text-slate-300 mb-10">{t('dragSlider')}</p>
         <div className="max-w-2xl mx-auto bg-slate-900/30 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-lg">
-          <Slider
-            value={[cost]}
-            onValueChange={(value) => setCost(value[0])}
-            min={100}
-            max={1000}
-            step={1}
+          <input 
+            type="range" 
+            id="cost-slider" 
+            min="100" 
+            max="1000" 
+            value={cost} 
+            step="1" 
+            className="w-full"
+            onChange={(e) => setCost(parseInt(e.target.value))}
           />
           <div className="flex justify-between text-xs text-slate-400 mt-2 px-2">
             <span>$100</span>
@@ -63,15 +96,15 @@ export default function SavingsCalculator({ onDetailsClick }: SavingsCalculatorP
           <div className="mt-8 grid grid-cols-3 gap-4 text-center">
             <div>
               <p className="text-sm text-slate-400">{t('repairCost')}</p>
-              <p className="text-xl sm:text-2xl font-bold text-white">${cost}</p>
+              <p id="repair-cost" className="text-xl sm:text-2xl font-bold text-white">${cost}</p>
             </div>
             <div>
               <p className="text-sm text-slate-400">{t('youSave')}</p>
-              <p className="text-xl sm:text-2xl font-bold text-cyan-400">${savings}</p>
+              <p id="savings-amount" className="text-xl sm:text-2xl font-bold text-cyan-400">${savings}</p>
             </div>
             <div>
               <p className="text-sm text-slate-400">{t('finalCost')}</p>
-              <p className="text-xl sm:text-2xl font-bold text-white">${finalCost}</p>
+              <p id="final-cost" className="text-xl sm:text-2xl font-bold text-white">${finalCost}</p>
             </div>
           </div>
         </div>
