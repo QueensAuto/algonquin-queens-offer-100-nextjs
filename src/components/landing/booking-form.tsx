@@ -268,7 +268,7 @@ export default function BookingForm() {
                         <h3 className="text-xl font-bold text-white mb-4" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>{t('vehicleDetails')}</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
-                                <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('carYear')}</label>
+                                <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('vehicle-year')}</label>
                                 <Controller name="vehicle-year" control={control} render={({ field }) => (
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger className="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:text-sm h-auto"><SelectValue placeholder={t('selectYearPlaceholder')} /></SelectTrigger>
@@ -371,3 +371,5 @@ export default function BookingForm() {
     </section>
   );
 }
+
+    

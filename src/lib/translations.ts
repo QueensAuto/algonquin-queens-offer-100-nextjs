@@ -241,7 +241,7 @@ export const translations = {
     termsOfUse: 'Términos de Uso',
 
     modalTitle: 'Detalles de la Oferta',
-    modalP1: 'Hasta $100 de DCTO. $15 de DCTO en $100, $30 en $200, $40 en $300, $50 en $500, $100 en $700+. Máximo $100.',
+    modalP1: 'Hasta $100 de DCTO. $15 de DCTO en $100, $30 de DCTO en $200, $40 de DCTO en $300, $50 de DCTO en $500, $100 de DCTO en $700+. Máximo $100.',
     modalP2: 'Excluye llantas e inspecciones estatales. Los cambios de aceite cuentan para el gasto pero no tienen descuento.',
     modalP3: 'No se puede combinar con otras ofertas. Válido en Queens Auto Service.',
     
@@ -255,3 +255,5 @@ export const translations = {
     popupCTAV2: 'Reclamar Mi Paquete →',
   },
 };
+
+    
