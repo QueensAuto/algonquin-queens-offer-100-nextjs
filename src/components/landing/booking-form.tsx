@@ -271,7 +271,9 @@ export default function BookingForm() {
                                 <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('vehicle-year')}</label>
                                 <Controller name="vehicle-year" control={control} render={({ field }) => (
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                        <SelectTrigger className="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:text-sm h-auto"><SelectValue placeholder={t('selectYearPlaceholder')} /></SelectTrigger>
+                                        <SelectTrigger className="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm h-auto">
+                                          <SelectValue placeholder={t('selectYearPlaceholder')} />
+                                        </SelectTrigger>
                                         <SelectContent>
                                             {yearOptions.map(year => <SelectItem key={year} value={year}>{year}</SelectItem>)}
                                         </SelectContent>
@@ -299,7 +301,7 @@ export default function BookingForm() {
                         </div>
                     </div>
                     <div className="mt-8 text-center">
-                        <Button type="button" onClick={handleNext} disabled={!isStep1Valid} className="w-full cta-button h-auto px-8 py-4 text-lg font-bold rounded-full">
+                        <Button type="button" onClick={handleNext} disabled={!isStep1Valid} className="cta-button w-full h-auto px-8 py-4 text-lg font-bold rounded-full">
                             {t('nextBtn')} &rarr;
                         </Button>
                         <p className="mt-2 text-xs text-slate-400">{t('ctaUrgency')}</p>
@@ -355,7 +357,7 @@ export default function BookingForm() {
                             <Button type="button" variant="ghost" onClick={handleBack} className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-slate-300 rounded-full hover:bg-slate-800 transition-colors">
                                 &larr; {t('backBtn')}
                             </Button>
-                            <Button type="submit" disabled={isSubmitting || !selectedTime} className="w-full sm:w-auto cta-button inline-flex items-center justify-center h-auto px-8 py-4 text-xl font-bold rounded-full">
+                            <Button type="submit" disabled={isSubmitting || !selectedTime} className="cta-button w-full sm:w-auto inline-flex items-center justify-center h-auto px-8 py-4 text-xl font-bold rounded-full">
                                 {isSubmitting && <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5" />}
                                 {isSubmitting ? t('submitBtnLoading') : t('submitBtn')}
                             </Button>
