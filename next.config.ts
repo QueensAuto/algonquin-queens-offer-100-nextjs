@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
         hostname: 'queensautoserviceselgin.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'queensautoservices.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

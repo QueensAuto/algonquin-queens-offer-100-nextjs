@@ -16,7 +16,7 @@ export default function ServiceArea() {
         </p>
         <div className="mt-12 rounded-2xl overflow-hidden border-4 border-slate-800 shadow-2xl">
           <Image
-            src="https://queensautoserviceselgin.com/wp-content/uploads/2025/08/Queens-Elgin-map.webp"
+            src="https://queensautoservices.com/wp-content/uploads/Queens-Auto-Services-Map.webp"
             alt="Map of Queens Auto Service service area in the greater Elgin area"
             width={1024}
             height={576}
