@@ -92,7 +92,7 @@ export const translations = {
     aboutTitle: 'Driven by Passion for Cars — and Care for People.',
     aboutBody: 'At Queens Auto, we’re not a big chain — we’re a neighborhood shop built on trust, transparency, and true passion for what we do. Every car that comes through our doors gets treated like family, and every customer drives out knowing they got real value — not gimmicks.',
     aboutTagline: 'Real people. Real service. We fix the car — and the stress.',
-    address: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block lucide lucide-map-pin mr-2 h-4 w-4 text-cyan-400"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>1303 Dundee Ave, 2 blocks from I-90, Elgin',
+    address: '1303 Dundee Ave, 2 blocks from I-90, Elgin',
     
     faqTitle: 'Frequently Asked Questions',
     faqQ1: 'How does the “Up to $100 Off” offer work?',
@@ -217,7 +217,7 @@ export const translations = {
     aboutTitle: 'Impulsados por la Pasión por los Autos — y el Cuidado por las Personas.',
     aboutBody: 'En Queens Auto, no somos una gran cadena — somos un taller de barrio construido sobre la confianza, la transparencia y la verdadera pasión por lo que hacemos. Cada auto es tratado como de la familia.',
     aboutTagline: 'Gente real. Servicio real. Arreglamos el auto y el estrés.',
-    address: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block lucide lucide-map-pin mr-2 h-4 w-4 text-cyan-400"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>1303 Dundee Ave, a 2 cuadras de la I-90, Elgin',
+    address: '1303 Dundee Ave, a 2 cuadras de la I-90, Elgin',
 
     faqTitle: 'Preguntas Frecuentes',
     faqQ1: '¿Cómo funciona la oferta de “Hasta $100 de Descuento”?',

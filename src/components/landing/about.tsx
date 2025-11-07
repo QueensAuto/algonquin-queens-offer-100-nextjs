@@ -37,7 +37,7 @@ export default function About() {
               />
             <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-2xl">
               <p className="text-sm text-slate-200 font-semibold flex items-center">
-                <MapPin className="inline-block lucide lucide-map-pin mr-2 h-4 w-4 text-cyan-400" />
+                <MapPin className="inline-block mr-2 h-4 w-4 text-cyan-400" />
                 {t('address')}
               </p>
             </div>
