@@ -75,7 +75,7 @@ export default function Testimonials() {
           <div className="mt-12 text-center">
             <Button
               onClick={showMoreReviews}
-              className="w-full sm:w-auto px-8 py-3 bg-slate-700 text-white font-semibold rounded-full shadow-lg hover:bg-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-500 focus:ring-opacity-50 transition-all duration-300 h-auto"
+              className="cta-button w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-full shadow-lg h-auto"
             >
               {t('loadMore')}
             </Button>

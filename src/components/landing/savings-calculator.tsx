@@ -110,7 +110,7 @@ export default function SavingsCalculator({ onDetailsClick }: SavingsCalculatorP
         </div>
 
         <div className="max-w-2xl mx-auto mt-6">
-          <Button onClick={handleSuggestion} disabled={isLoading}>
+          <Button onClick={handleSuggestion} disabled={isLoading} className="cta-button">
             <WandSparkles className="mr-2 h-4 w-4" />
             {t('getAISuggestions')}
           </Button>
