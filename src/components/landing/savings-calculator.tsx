@@ -1,10 +1,6 @@
 'use client';
 import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from '@/hooks/use-translation';
-import { Button } from '@/components/ui/button';
-import { generateSavingsSuggestions } from '@/app/actions';
-import { WandSparkles } from 'lucide-react';
-import { Skeleton } from '../ui/skeleton';
 
 type SavingsCalculatorProps = {
   onDetailsClick: () => void;
@@ -13,8 +9,6 @@ type SavingsCalculatorProps = {
 export default function SavingsCalculator({ onDetailsClick }: SavingsCalculatorProps) {
   const { t } = useTranslation();
   const [cost, setCost] = useState(450);
-  const [suggestions, setSuggestions] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const savingsTiers = useMemo(() => [
       { min: 700, max: Infinity, discount: 100 },
@@ -58,16 +52,6 @@ export default function SavingsCalculator({ onDetailsClick }: SavingsCalculatorP
     animateValue(finalCostEl, currentFinalCost, finalCost, 300);
   }, [cost, savings, finalCost]);
 
-  const handleSuggestion = async () => {
-    setIsLoading(true);
-    setSuggestions('');
-    const result = await generateSavingsSuggestions(cost);
-    if (result) {
-      setSuggestions(result.suggestions);
-    }
-    setIsLoading(false);
-  };
-
   return (
     <section id="scale-section" className="py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -108,28 +92,6 @@ export default function SavingsCalculator({ onDetailsClick }: SavingsCalculatorP
             </div>
           </div>
         </div>
-
-        <div className="max-w-2xl mx-auto mt-6">
-          <Button onClick={handleSuggestion} disabled={isLoading} className="cta-button">
-            <WandSparkles className="mr-2 h-4 w-4" />
-            {t('getAISuggestions')}
-          </Button>
-
-          {isLoading && (
-            <div className="mt-4 space-y-2 text-left">
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-4 w-1/2" />
-            </div>
-          ) }
-          
-          {suggestions && !isLoading && (
-            <div className="mt-4 text-left p-4 bg-slate-800/50 rounded-lg border border-slate-700">
-              <h4 className="font-semibold text-white mb-2 flex items-center gap-2"><WandSparkles className="text-cyan-400"/> {t('aiSuggestionsTitle')}</h4>
-              <p className="text-slate-300 whitespace-pre-wrap">{suggestions}</p>
-            </div>
-          )}
-        </div>
-
 
         <p className="mt-4 text-xs text-slate-500">{t('oilChangeNote')}</p>
         <button onClick={onDetailsClick} className="mt-2 text-xs text-cyan-400 underline hover:text-cyan-300">

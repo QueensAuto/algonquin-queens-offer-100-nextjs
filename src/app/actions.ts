@@ -1,17 +1,5 @@
 'use server';
 
-import { getSavingsSuggestions } from '@/ai/flows/ai-savings-suggestions';
-
-export async function generateSavingsSuggestions(currentCost: number) {
-  try {
-    const result = await getSavingsSuggestions({ currentCost });
-    return result;
-  } catch (error) {
-    console.error('Error getting savings suggestions:', error);
-    return { suggestions: 'Could not retrieve suggestions at this time. Please try again later.' };
-  }
-}
-
 type BookingData = {
   'first-name': string;
   'last-name': string;
