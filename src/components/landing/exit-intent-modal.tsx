@@ -48,7 +48,7 @@ export default function ExitIntentModal({ isOpen, onOpenChange }: ExitIntentModa
                 ))}
               </ul>
               <div className="flex justify-center">
-                <Button onClick={handleCtaClick} className="cta-button h-auto px-6 py-3 font-bold">
+                <Button onClick={handleCtaClick} className="cta-button text-white h-auto px-6 py-3 font-bold">
                   {t('popupCTAV2')}
                 </Button>
               </div>

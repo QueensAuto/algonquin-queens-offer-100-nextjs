@@ -75,7 +75,7 @@ export default function Testimonials() {
           <div className="mt-12 text-center">
             <Button
               onClick={showMoreReviews}
-              className="cta-button w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-full shadow-lg h-auto"
+              className="cta-button text-white w-full sm:w-auto px-8 py-3 font-semibold rounded-full shadow-lg h-auto"
             >
               {t('loadMore')}
             </Button>
