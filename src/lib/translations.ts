@@ -15,9 +15,7 @@ export const translations = {
     finalCost: 'Final Cost',
     oilChangeNote: 'Oil changes count toward spend but are not discounted.',
     detailsApply: '*Details Apply',
-    getAISuggestions: 'Get AI Savings Suggestions',
-    aiSuggestionsTitle: 'AI Savings Suggestions',
-
+    
     couponTitle: 'What Repairs Can You Use This Coupon For?',
     couponSubtitle: 'This discount applies to most of the repair work we do here at Queens Auto. That means you can save big on services like:',
     couponList1: `<li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0 mt-1"></i>Brake repairs & replacements</li>
@@ -64,7 +62,7 @@ export const translations = {
     'mobile-number': 'Mobile Number',
     'mobile-numberPlaceholder': '(###) ###-####',
     vehicleDetails: 'Vehicle Details',
-    'vehicle-year': 'Year',
+    'year': 'Year',
     selectYearPlaceholder: 'Select Year',
     'vehicle-make': 'Make',
     'vehicle-makePlaceholder': 'e.g., Ford',
@@ -143,8 +141,6 @@ export const translations = {
     finalCost: 'Costo Final',
     oilChangeNote: 'Los cambios de aceite cuentan para el gasto pero no tienen descuento.',
     detailsApply: '*Aplican Detalles',
-    getAISuggestions: 'Obtener Sugerencias de Ahorro con IA',
-    aiSuggestionsTitle: 'Sugerencias de Ahorro con IA',
 
     couponTitle: '¿En Qué Reparaciones Puedes Usar Este Cupón?',
     couponSubtitle: 'Este descuento se aplica a la mayoría de los trabajos de reparación que hacemos en Queens Auto. Eso significa que puedes ahorrar en grande en servicios como:',
@@ -192,7 +188,7 @@ export const translations = {
     'mobile-number': 'Número de Celular',
     'mobile-numberPlaceholder': '(###) ###-####',
     vehicleDetails: 'Detalles del Vehículo',
-    'vehicle-year': 'Año',
+    'year': 'Año',
     selectYearPlaceholder: 'Selecciona el Año',
     'vehicle-make': 'Marca',
     'vehicle-makePlaceholder': 'ej., Ford',
@@ -247,7 +243,7 @@ export const translations = {
     
     popupTitleV2: '¡Espera! No te pierdas este paquete de reparación',
     popupSubtitleV2: 'Obtén tu Descuento por Nivel + $150 en Bonos Gratis al Reservar Hoy.',
-    popupBonus1: 'Ahorros por Nivel: $15 de DCTO en $100+ | $50 de DCTO en $500+ | $100 de DCTO en $700+',
+    popupBonus1: 'Ahorros por Nivel: $15 de DCTO en $100+ | $30 de DCTO en $200+ | $40 de DCTO en $300+ | $50 de DCTO en $500+ | $100 de DCTO en $700+',
     popupBonus2: 'Inspección Vehicular Gratuita ($79 Valor)',
     popupBonus3: 'Revisión de Seguridad de Frenos y Llantas Gratuita ($39 Valor)',
     popupBonus4: 'Asistencia en Carretera Incluida ($59 Valor)',
@@ -255,5 +251,3 @@ export const translations = {
     popupCTAV2: 'Reclamar Mi Paquete →',
   },
 };
-
-    
