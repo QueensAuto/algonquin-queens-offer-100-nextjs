@@ -45,7 +45,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         if(wistiaEnContainer) wistiaEnContainer.classList.add('hidden');
         if(wistiaEsContainer) wistiaEsContainer.classList.remove('hidden');
         if (window.Wistia && window.Wistia.api) { 
-            const enVideo = window.Wistia.api('a6i5ic59jv'); 
+            const enVideo = window.Wistia.api('7759m49oox'); 
             if (enVideo) enVideo.pause(); 
         }
     } else {

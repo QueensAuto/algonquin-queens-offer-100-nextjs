@@ -54,7 +54,7 @@ export default function Hero() {
                   }}
                 >
                   <div
-                    className="wistia_embed wistia_async_a6i5ic59jv videoFoam=true"
+                    className="wistia_embed wistia_async_7759m49oox videoFoam=true"
                     style={{ height: '100%', position: 'relative', width: '100%' }}
                   >
                     &nbsp;
