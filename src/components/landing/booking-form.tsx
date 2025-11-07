@@ -110,7 +110,7 @@ export default function BookingForm() {
                 const referrerHost = new URL(data.referrer).hostname;
                 if (referrerHost.includes('google') || referrerHost.includes('bing') || referrerHost.includes('yahoo')) {
                     data.utm_medium = 'organic';
-                } else if (referrerHost.includes('facebook') || referrerHost.includes('instagram') || referrerHost.includes('twitter')) {
+                } else if (referrerHost.includes('instagram') || referrerHost.includes('twitter')) {
                     data.utm_medium = 'social';
                 }
             } catch (e) { /* Invalid referrer URL */ }
@@ -340,7 +340,7 @@ export default function BookingForm() {
                                 <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('year')}</label>
                                 <Controller name="vehicle-year" control={control} render={({ field }) => (
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                        <SelectTrigger className="w-full mt-1 bg-slate-800 border border-slate-600 text-white focus:ring-cyan-400">
+                                        <SelectTrigger className="mt-1 bg-slate-800 border border-slate-600 text-white focus:ring-cyan-400">
                                           <SelectValue placeholder={t('selectYearPlaceholder')} />
                                         </SelectTrigger>
                                         <SelectContent>
