@@ -252,7 +252,7 @@ export default function BookingForm() {
                                                     {...field}
                                                     id={fieldName}
                                                     placeholder={t(`${fieldName}Placeholder`)}
-                                                    className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${isTouched && !hasError ? 'border-green-500' : ''} ${hasError ? 'border-red-500' : ''}`}
+                                                    className={`input-field block w-full bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${isTouched && !hasError ? 'border-green-500' : ''} ${hasError ? 'border-red-500' : ''}`}
                                                 />
                                             )}
                                         />
@@ -273,7 +273,7 @@ export default function BookingForm() {
                                 <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('year')}</label>
                                 <Controller name="vehicle-year" control={control} render={({ field }) => (
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                        <SelectTrigger className="mt-1 block w-full px-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm h-[50px]">
+                                        <SelectTrigger className="mt-1 block w-full px-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm h-[50px] py-2">
                                           <SelectValue placeholder={t('selectYearPlaceholder')} />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -291,7 +291,7 @@ export default function BookingForm() {
                                     <label htmlFor={fieldName} className="block text-sm font-medium text-slate-300 mb-1">{t(fieldName)}</label>
                                     <div className="relative mt-1">
                                         <Controller name={fieldName} control={control} render={({ field }) => (
-                                            <Input {...field} id={fieldName} placeholder={t(`${fieldName}Placeholder`)} className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${isTouched && !hasError ? 'border-green-500' : ''} ${hasError ? 'border-red-500' : ''}`}/>
+                                            <Input {...field} id={fieldName} placeholder={t(`${fieldName}Placeholder`)} className={`input-field block w-full bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${isTouched && !hasError ? 'border-green-500' : ''} ${hasError ? 'border-red-500' : ''}`}/>
                                         )}/>
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                           {isTouched && !hasError && <CheckCircle className="h-5 w-5 text-green-500" />}
@@ -377,3 +377,5 @@ export default function BookingForm() {
     </section>
   );
 }
+
+    
