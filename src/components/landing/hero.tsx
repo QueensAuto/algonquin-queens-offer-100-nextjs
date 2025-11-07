@@ -39,28 +39,7 @@ export default function Hero() {
 
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">
             <div style={{ display: language === 'en' ? 'block' : 'none' }}>
-              <div
-                className="wistia_responsive_padding"
-                style={{ padding: '56.25% 0 0 0', position: 'relative' }}
-              >
-                <div
-                  className="wistia_responsive_wrapper"
-                  style={{
-                    height: '100%',
-                    left: '0',
-                    position: 'absolute',
-                    top: '0',
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    className="wistia_embed wistia_async_7759m49oox videoFoam=true"
-                    style={{ height: '100%', position: 'relative', width: '100%' }}
-                  >
-                    &nbsp;
-                  </div>
-                </div>
-              </div>
+              <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
             </div>
             <div style={{ display: language === 'es' ? 'block' : 'none' }}>
               <div

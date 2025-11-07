@@ -30,6 +30,8 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
         
         <script src="https://fast.wistia.com/player.js" async></script>
+        <script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module"></script>
+        <style dangerouslySetInnerHTML={{__html: `wistia-player[media-id='7759m49oox']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/7759m49oox/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }`}}></style>
       </head>
       <body
         className={cn(
