@@ -224,7 +224,7 @@ export default function BookingForm() {
         <div className="bg-slate-950 shadow-inner shadow-black/20 rounded-[16px] p-6 sm:p-8 md:p-12">
           <div id="form-content">
             <div className="text-center">
-              <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
+              <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-white font-headline">
                 <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                   {t('formTitle')}
                 </span>
@@ -238,8 +238,10 @@ export default function BookingForm() {
                 <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {(['first-name', 'last-name', 'email', 'mobile-number'] as const).map(fieldName => {
+                            const isTouched = touchedFields[fieldName];
+                            const hasError = !!errors[fieldName];
                             return (
-                                <div key={fieldName} className={"input-wrapper " + (touchedFields[fieldName] && !errors[fieldName] ? 'is-valid' : '') + (errors[fieldName] ? 'is-invalid' : '')}>
+                                <div key={fieldName} >
                                     <label htmlFor={fieldName} className="block text-sm font-medium text-slate-300 mb-1">{t(fieldName)}</label>
                                     <div className="relative mt-1">
                                         <Controller
@@ -250,13 +252,13 @@ export default function BookingForm() {
                                                     {...field}
                                                     id={fieldName}
                                                     placeholder={t(`${fieldName}Placeholder`)}
-                                                    className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm`}
+                                                    className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${isTouched && !hasError ? 'border-green-500' : ''} ${hasError ? 'border-red-500' : ''}`}
                                                 />
                                             )}
                                         />
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <CheckCircle className="validation-icon icon-valid h-5 w-5" />
-                                            <XCircle className="validation-icon icon-invalid h-5 w-5" />
+                                          {isTouched && !hasError && <CheckCircle className="h-5 w-5 text-green-500" />}
+                                          {hasError && <XCircle className="h-5 w-5 text-red-500" />}
                                         </div>
                                     </div>
                                     {errors[fieldName] && <p className="mt-1 text-xs text-red-400">{errors[fieldName]?.message}</p>}
@@ -265,13 +267,13 @@ export default function BookingForm() {
                         })}
                     </div>
                     <div className="pt-2">
-                        <h3 className="text-xl font-bold text-white mb-4" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>{t('vehicleDetails')}</h3>
+                        <h3 className="text-xl font-bold text-white mb-4 font-headline">{t('vehicleDetails')}</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('year')}</label>
                                 <Controller name="vehicle-year" control={control} render={({ field }) => (
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                        <SelectTrigger className="mt-1 block w-full px-3 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm h-auto">
+                                        <SelectTrigger className="mt-1 block w-full px-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm h-[50px]">
                                           <SelectValue placeholder={t('selectYearPlaceholder')} />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -282,16 +284,18 @@ export default function BookingForm() {
                                 {errors['vehicle-year'] && <p className="mt-1 text-xs text-red-400">{errors['vehicle-year']?.message}</p>}
                             </div>
                             {(['vehicle-make', 'vehicle-model'] as const).map(fieldName => {
+                                const isTouched = touchedFields[fieldName];
+                                const hasError = !!errors[fieldName];
                                 return (
-                                <div key={fieldName} className={"input-wrapper " + (touchedFields[fieldName] && !errors[fieldName] ? 'is-valid' : '') + (errors[fieldName] ? 'is-invalid' : '')}>
+                                <div key={fieldName}>
                                     <label htmlFor={fieldName} className="block text-sm font-medium text-slate-300 mb-1">{t(fieldName)}</label>
                                     <div className="relative mt-1">
                                         <Controller name={fieldName} control={control} render={({ field }) => (
-                                            <Input {...field} id={fieldName} placeholder={t(`${fieldName}Placeholder`)} className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm`}/>
+                                            <Input {...field} id={fieldName} placeholder={t(`${fieldName}Placeholder`)} className={`input-field block w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${isTouched && !hasError ? 'border-green-500' : ''} ${hasError ? 'border-red-500' : ''}`}/>
                                         )}/>
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <CheckCircle className="validation-icon icon-valid h-5 w-5" />
-                                            <XCircle className="validation-icon icon-invalid h-5 w-5" />
+                                          {isTouched && !hasError && <CheckCircle className="h-5 w-5 text-green-500" />}
+                                          {hasError && <XCircle className="h-5 w-5 text-red-500" />}
                                         </div>
                                     </div>
                                     {errors[fieldName] && <p className="mt-1 text-xs text-red-400">{errors[fieldName]?.message}</p>}
@@ -311,7 +315,7 @@ export default function BookingForm() {
               {step === 2 && (
                  <div className="space-y-8">
                      <div>
-                        <h3 className="text-xl font-bold text-white mb-4" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>{t('whenBringIn')}</h3>
+                        <h3 className="text-xl font-bold text-white mb-4 font-headline">{t('whenBringIn')}</h3>
                         <div className="bg-slate-800/50 p-6 rounded-lg shadow-lg w-full">
                            <div className="flex items-center justify-between mb-6">
                                <Button type="button" variant="ghost" onClick={() => setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() -1, 1))} className="p-2 rounded-full hover:bg-slate-700 transition-colors"><ChevronLeft className="w-6 h-6 text-slate-400" /></Button>
