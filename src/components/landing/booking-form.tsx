@@ -55,7 +55,7 @@ export default function BookingForm() {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid, touchedFields },
+    formState: { errors, touchedFields },
     watch,
     setValue,
     trigger,
@@ -67,6 +67,8 @@ export default function BookingForm() {
   const selectedDate = watch('date');
   const selectedTime = watch('time');
   const yearOptions = Array.from({ length: new Date().getFullYear() + 1 - 1990 }, (_, i) => String(new Date().getFullYear() + 1 - i));
+  const watchedFields = watch(['first-name', 'last-name', 'email', 'mobile-number', 'vehicle-year', 'vehicle-make', 'vehicle-model']);
+
 
   const availableTimes = useCallback(() => {
     if (!selectedDate) return [];
@@ -144,15 +146,16 @@ export default function BookingForm() {
       console.error("Booking failed");
     }
   };
-
+  
   const isStep1Valid =
-    !errors['first-name'] && touchedFields['first-name'] &&
-    !errors['last-name'] && touchedFields['last-name'] &&
-    !errors.email && touchedFields.email &&
-    !errors['mobile-number'] && touchedFields['mobile-number'] &&
-    !!watch('vehicle-year') &&
-    !errors['vehicle-make'] && touchedFields['vehicle-make'] &&
-    !errors['vehicle-model'] && touchedFields['vehicle-model'];
+    !errors['first-name'] && !!watch('first-name') &&
+    !errors['last-name'] && !!watch('last-name') &&
+    !errors.email && !!watch('email') &&
+    !errors['mobile-number'] && !!watch('mobile-number') &&
+    !errors['vehicle-year'] && !!watch('vehicle-year') &&
+    !errors['vehicle-make'] && !!watch('vehicle-make') &&
+    !errors['vehicle-model'] && !!watch('vehicle-model');
+
 
   const renderCalendar = useCallback(() => {
     const month = currentMonth.getMonth();
@@ -220,6 +223,12 @@ export default function BookingForm() {
                         {(['first-name', 'last-name', 'email', 'mobile-number'] as const).map(fieldName => {
                             const isTouched = touchedFields[fieldName];
                             const hasError = !!errors[fieldName];
+                            const autoCompleteMap = {
+                                'first-name': 'given-name',
+                                'last-name': 'family-name',
+                                'email': 'email',
+                                'mobile-number': 'tel'
+                            };
                             return (
                                 <div key={fieldName} >
                                     <label htmlFor={fieldName} className="block text-sm font-medium text-slate-300 mb-1">{t(fieldName)}</label>
@@ -232,6 +241,7 @@ export default function BookingForm() {
                                                     {...field}
                                                     id={fieldName}
                                                     placeholder={t(`${fieldName}Placeholder`)}
+                                                    autoComplete={autoCompleteMap[fieldName]}
                                                     className={`input-field block w-full bg-slate-800 border border-slate-600 rounded-md shadow-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 sm:text-sm ${isTouched && !hasError ? 'border-green-500' : ''} ${hasError ? 'border-red-500' : ''}`}
                                                 />
                                             )}
@@ -253,7 +263,7 @@ export default function BookingForm() {
                                 <label htmlFor="vehicle-year" className="block text-sm font-medium text-slate-300 mb-1">{t('year')}</label>
                                 <Controller name="vehicle-year" control={control} render={({ field }) => (
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                        <SelectTrigger className="mt-1 bg-slate-800 border border-slate-600 text-white focus:ring-cyan-400">
+                                        <SelectTrigger className="w-full mt-1 bg-slate-800 border border-slate-600 text-white focus:ring-cyan-400">
                                           <SelectValue placeholder={t('selectYearPlaceholder')} />
                                         </SelectTrigger>
                                         <SelectContent>
