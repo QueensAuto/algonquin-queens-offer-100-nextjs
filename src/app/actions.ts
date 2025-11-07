@@ -21,13 +21,42 @@ export async function submitBooking(data: BookingData) {
 
   const webhookUrl = 'https://n8n.queensautoservices.com/webhook-test/465c85ff-f19e-4d8b-8907-c806cc9fc07b';
 
+  const webhookPayload = {
+    "First Name": data['first-name'],
+    "Last Name": data['last-name'],
+    "Full Name": data['full-name'],
+    "Phone": data['mobile-number'],
+    "Email": data.email,
+    "Car Make": data['vehicle-make'],
+    "Car Model": data['vehicle-model'],
+    "Car Year": data['vehicle-year'],
+    "Vehicle": data.vehicle,
+    "Appointment Date": data.date,
+    "Appointment Time": data.time,
+    "UTM Source": data.utm_source,
+    "UTM Medium": data.utm_medium,
+    "UTM Campaign": data.utm_campaign,
+    "UTM Term": data.utm_term,
+    "UTM Content": data.utm_content,
+    "GCLID": data.gclid,
+    "FBCLID": data.fbclid,
+    "MSCLKID": data.msclkid,
+    "GA Client ID": data.ga_client_id,
+    "FBC": data.fbc,
+    "Referrer": data.referrer,
+    "Page Variant": "save_100_v1_nextjs",
+    "User Language": data.language,
+    "Event ID": `gen_${Date.now()}`,
+    "Lead Type": "generate_lead"
+  };
+
   try {
     fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(webhookPayload),
     });
   } catch (error) {
     console.error('Failed to send data to webhook:', error);

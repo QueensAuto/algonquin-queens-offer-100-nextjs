@@ -19,10 +19,10 @@ import {
   Loader2,
   CheckCircle,
   XCircle,
-  PartyPopper,
 } from 'lucide-react';
 import { submitBooking } from '@/app/actions';
 import { useRouter } from 'next/navigation';
+import { useLanguage } from '@/context/language-context';
 
 
 const validationSchema = z.object({
@@ -37,7 +37,7 @@ const validationSchema = z.object({
   time: z.string().nonempty('Please select a time'),
 });
 
-type FormData = z.infer<typeof validationSchema>;
+type FormData = z.infer<typeof validationSchema> & {[key:string]: any};
 
 const timeSlotsByDay = {
   saturday: ["08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM"],
@@ -46,16 +46,91 @@ const timeSlotsByDay = {
 
 export default function BookingForm() {
   const { t } = useTranslation();
+  const { language } = useLanguage();
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [trackingData, setTrackingData] = useState({});
+
+  useEffect(() => {
+    const getCookie = (name: string) => {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const trackingKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'msclkid'];
+    const data: { [key: string]: string | null } = {};
+
+    trackingKeys.forEach(key => {
+        if (params.has(key)) {
+            sessionStorage.setItem(key, params.get(key)!);
+        }
+        if (sessionStorage.getItem(key)) {
+            data[key] = sessionStorage.getItem(key);
+        }
+    });
+
+    if (document.referrer && !sessionStorage.getItem('referrer')) {
+        if (!document.referrer.includes(window.location.hostname)) {
+             sessionStorage.setItem('referrer', document.referrer);
+        }
+    }
+    data.referrer = sessionStorage.getItem('referrer');
+    
+    const gaCookie = getCookie('_ga');
+    data.ga_client_id = gaCookie ? gaCookie.split('.').slice(2).join('.') : null;
+    
+    if (!data.gclid) {
+        data.gclid = getCookie('_gcl_au');
+    }
+    
+    data.fbc = getCookie('_fbc');
+    
+    if (!data.utm_source) {
+        if (data.gclid) data.utm_source = 'google';
+        else if (data.fbclid) data.utm_source = 'facebook';
+        else if (data.msclkid) data.utm_source = 'bing';
+        else if (data.referrer) {
+            try {
+                const referrerHost = new URL(data.referrer).hostname.replace(/^www\./, '');
+                if (referrerHost.includes('google')) data.utm_source = 'google';
+                else if (referrerHost.includes('facebook') || referrerHost.includes('fb.com')) data.utm_source = 'facebook';
+                else if (referrerHost.includes('bing')) data.utm_source = 'bing';
+                else data.utm_source = referrerHost;
+            } catch (e) { /* Invalid referrer URL */ }
+        }
+    }
+
+    if (!data.utm_medium) {
+        if (data.gclid || data.msclkid) data.utm_medium = 'cpc';
+        else if (data.fbclid) data.utm_medium = 'cpc';
+        else if (data.referrer) {
+            try {
+                const referrerHost = new URL(data.referrer).hostname;
+                if (referrerHost.includes('google') || referrerHost.includes('bing') || referrerHost.includes('yahoo')) {
+                    data.utm_medium = 'organic';
+                } else if (referrerHost.includes('facebook') || referrerHost.includes('instagram') || referrerHost.includes('twitter')) {
+                    data.utm_medium = 'social';
+                }
+            } catch (e) { /* Invalid referrer URL */ }
+        }
+    }
+
+    const definedTrackingData = Object.fromEntries(
+        Object.entries(data).filter(([, v]) => v != null && v !== '')
+    );
+    
+    setTrackingData(definedTrackingData);
+}, []);
+
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const {
     control,
     handleSubmit,
-    formState: { errors, touchedFields },
+    formState: { errors, touchedFields, isValid: isFormValid },
     watch,
     setValue,
     trigger,
@@ -125,8 +200,10 @@ export default function BookingForm() {
     
     const enhancedData = {
       ...data,
+      ...trackingData,
       'full-name': `${data['first-name']} ${data['last-name']}`,
       vehicle: `${data['vehicle-year']} ${data['vehicle-make']} ${data['vehicle-model']}`,
+      language: language,
     };
 
     const result = await submitBooking(enhancedData);
@@ -223,7 +300,7 @@ export default function BookingForm() {
                         {(['first-name', 'last-name', 'email', 'mobile-number'] as const).map(fieldName => {
                             const isTouched = touchedFields[fieldName];
                             const hasError = !!errors[fieldName];
-                            const autoCompleteMap = {
+                            const autoCompleteMap: { [key: string]: string } = {
                                 'first-name': 'given-name',
                                 'last-name': 'family-name',
                                 'email': 'email',
@@ -367,5 +444,3 @@ export default function BookingForm() {
     </section>
   );
 }
-
-    
