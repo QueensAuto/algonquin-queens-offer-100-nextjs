@@ -16,6 +16,20 @@ type BookingData = {
 
 export async function submitBooking(data: BookingData) {
   console.log('New Booking Submitted:', data);
+
+  const webhookUrl = 'https://n8n.queensautoservices.com/webhook-test/465c85ff-f19e-4d8b-8907-c806cc9fc07b';
+
+  try {
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (error) {
+    console.error('Failed to send data to webhook:', error);
+  }
   
   // Here you would typically save the data to a database,
   // send confirmation emails/SMS, and interact with a CRM.
