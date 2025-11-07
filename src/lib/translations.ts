@@ -9,7 +9,7 @@ export const translations = {
     ctaUrgency: 'Exclusive Online Offer – Valid This Month Only',
     
     savingsScaleTitle: 'Your Repair Savings Scale',
-    dragSlider: "Drag the slider to see how much you\'ll save.",
+    dragSlider: "Drag the slider to see how much you'll save.",
     repairCost: 'Repair Cost',
     youSave: 'You Save',
     finalCost: 'Final Cost',
@@ -280,3 +280,5 @@ export const translations = {
     popupCTAV2: 'Reclamar Mi Paquete →',
   },
 };
+
+    
