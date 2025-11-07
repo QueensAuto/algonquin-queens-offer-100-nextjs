@@ -9,7 +9,12 @@ export const metadata: Metadata = {
   title: 'Queens Auto Service — Instant Auto Repair Savings',
   description: 'Book online to get an instant savings code. The more you spend, the more you save.',
   icons: {
-    icon: 'https://queensautoserviceselgin.com/wp-content/uploads/2023/02/1485941900_wheel.png',
+    icon: [
+      {
+        url: 'https://queensautoserviceselgin.com/wp-content/uploads/2023/02/1485941900_wheel.png',
+        href: 'https://queensautoserviceselgin.com/wp-content/uploads/2023/02/1485941900_wheel.png',
+      },
+    ],
   }
 };
 
