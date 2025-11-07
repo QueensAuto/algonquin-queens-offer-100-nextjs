@@ -8,6 +8,9 @@ import type { ReactNode } from 'react';
 export const metadata: Metadata = {
   title: 'Queens Auto Service — Instant Auto Repair Savings',
   description: 'Book online to get an instant savings code. The more you spend, the more you save.',
+  icons: {
+    icon: 'https://queensautoserviceselgin.com/wp-content/uploads/2023/02/1485941900_wheel.png',
+  }
 };
 
 export default function RootLayout({
@@ -23,7 +26,6 @@ export default function RootLayout({
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-W56FDLTF');`}}/>
-        <link rel="icon" href="https://queensautoserviceselgin.com/wp-content/uploads/2023/02/1485941900_wheel.png" type="image/png"/>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet" />
