@@ -51,33 +51,46 @@ export async function submitBooking(data: BookingData) {
   };
 
   try {
-    fetch(webhookUrl, {
+    const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(webhookPayload),
     });
+
+    if (response.ok) {
+        const responseData = await response.json();
+        
+        return { 
+          success: true, 
+          message: 'Booking confirmed!',
+          couponCode: responseData?.couponCode,
+          audioUrl: responseData?.audioUrl,
+          bookingDetails: {
+            name: `${data['first-name']}`,
+            vehicle: `${data['vehicle-year']} ${data['vehicle-make']} ${data['vehicle-model']}`,
+            appointment: `${data.date} at ${data.time}`,
+          }
+        };
+    } else {
+       console.error('Webhook response was not ok.', response.status, response.statusText);
+    }
+
   } catch (error) {
     console.error('Failed to send data to webhook:', error);
   }
   
-  // Here you would typically save the data to a database,
-  // send confirmation emails/SMS, and interact with a CRM.
-  
-  // For demo purposes, we'll simulate a successful submission.
-  
-  // Simulate a network delay
-  await new Promise(resolve => setTimeout(resolve, 1500));
-
-  const couponCode = `SAVE${Math.floor(1000 + Math.random() * 9000)}`;
+  // Fallback response in case of webhook failure
+  const fallbackCouponCode = `SAVE${Math.floor(1000 + Math.random() * 9000)}`;
 
   return { 
     success: true, 
     message: 'Booking confirmed!',
-    couponCode: couponCode,
+    couponCode: fallbackCouponCode,
+    audioUrl: null,
     bookingDetails: {
-      name: `${data['first-name']} ${data['last-name']}`,
+      name: `${data['first-name']}`,
       vehicle: `${data['vehicle-year']} ${data['vehicle-make']} ${data['vehicle-model']}`,
       appointment: `${data.date} at ${data.time}`,
     }

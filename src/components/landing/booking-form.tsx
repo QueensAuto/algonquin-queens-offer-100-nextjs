@@ -130,7 +130,7 @@ export default function BookingForm() {
   const {
     control,
     handleSubmit,
-    formState: { errors, touchedFields, isValid: isFormValid },
+    formState: { errors, touchedFields },
     watch,
     setValue,
     trigger,
@@ -207,20 +207,22 @@ export default function BookingForm() {
     };
 
     const result = await submitBooking(enhancedData);
-    setIsSubmitting(false);
-
+    
     if(result.success) {
+      if (result.couponCode) sessionStorage.setItem('userCouponCode', result.couponCode);
+      if (result.audioUrl) sessionStorage.setItem('customAudioUrl', result.audioUrl);
+      
       const thankYouUrl = new URL('/thank-you', window.location.origin);
       thankYouUrl.searchParams.set('name', result.bookingDetails.name);
       thankYouUrl.searchParams.set('vehicle', result.bookingDetails.vehicle);
       thankYouUrl.searchParams.set('appointment', result.bookingDetails.appointment);
-      thankYouUrl.searchParams.set('couponCode', result.couponCode);
       
       router.push(thankYouUrl.toString());
 
     } else {
       // Handle error, maybe with a toast
       console.error("Booking failed");
+      setIsSubmitting(false);
     }
   };
   
