@@ -22,6 +22,8 @@ import {
   PartyPopper,
 } from 'lucide-react';
 import { submitBooking } from '@/app/actions';
+import { useRouter } from 'next/navigation';
+
 
 const validationSchema = z.object({
   'first-name': z.string().min(2, 'First name is required'),
@@ -44,9 +46,9 @@ const timeSlotsByDay = {
 
 export default function BookingForm() {
   const { t } = useTranslation();
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionResult, setSubmissionResult] = useState<{success: boolean; couponCode: string; bookingDetails: { name: string; vehicle: string; appointment: string; }} | null>(null);
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -118,11 +120,25 @@ export default function BookingForm() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    const result = await submitBooking(data);
+    
+    const enhancedData = {
+      ...data,
+      'full-name': `${data['first-name']} ${data['last-name']}`,
+      vehicle: `${data['vehicle-year']} ${data['vehicle-make']} ${data['vehicle-model']}`,
+    };
+
+    const result = await submitBooking(enhancedData);
     setIsSubmitting(false);
+
     if(result.success) {
-      setSubmissionResult(result);
-      setStep(3);
+      const thankYouUrl = new URL('/thank-you', window.location.origin);
+      thankYouUrl.searchParams.set('name', result.bookingDetails.name);
+      thankYouUrl.searchParams.set('vehicle', result.bookingDetails.vehicle);
+      thankYouUrl.searchParams.set('appointment', result.bookingDetails.appointment);
+      thankYouUrl.searchParams.set('couponCode', result.couponCode);
+      
+      router.push(thankYouUrl.toString());
+
     } else {
       // Handle error, maybe with a toast
       console.error("Booking failed");
@@ -181,42 +197,6 @@ export default function BookingForm() {
     return dayElements;
   }, [currentMonth, selectedDate, setValue]);
 
-
-  if (step === 3 && submissionResult) {
-    return (
-        <section id="book-appointment-form" className="py-24 px-4">
-            <div className="max-w-2xl mx-auto animated-gradient-border p-1">
-                <div className="bg-slate-950 shadow-inner shadow-black/20 rounded-[16px] p-6 sm:p-8 md:p-12 text-center">
-                    <PartyPopper className="w-16 h-16 mx-auto text-cyan-400 mb-4" />
-                    <h2 className="text-3xl font-bold text-white font-headline">{t('thankYouTitle')}</h2>
-                    <p className="text-lg text-slate-300 mt-2">{t('thankYouSubtitle')}</p>
-
-                    <div className="mt-8 text-left bg-slate-800/50 p-6 rounded-lg space-y-4">
-                        <div className="border-b border-slate-700 pb-2">
-                            <p className="text-sm text-slate-400">{t('confirmationName')}</p>
-                            <p className="font-semibold text-white">{submissionResult.bookingDetails.name}</p>
-                        </div>
-                        <div className="border-b border-slate-700 pb-2">
-                            <p className="text-sm text-slate-400">{t('confirmationVehicle')}</p>
-                            <p className="font-semibold text-white">{submissionResult.bookingDetails.vehicle}</p>
-                        </div>
-                        <div>
-                            <p className="text-sm text-slate-400">{t('confirmationAppointment')}</p>
-                            <p className="font-semibold text-white">{submissionResult.bookingDetails.appointment}</p>
-                        </div>
-                    </div>
-                    
-                    <div className="mt-8">
-                        <p className="text-slate-300">{t('couponCodeInstruction')}</p>
-                        <div className="my-4 p-4 border-2 border-dashed border-cyan-400 rounded-lg bg-cyan-400/10">
-                            <p className="text-3xl font-bold text-white tracking-widest">{submissionResult.couponCode}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-  }
 
   return (
     <section id="book-appointment-form" className="py-24 px-4">
@@ -377,3 +357,5 @@ export default function BookingForm() {
     </section>
   );
 }
+
+    

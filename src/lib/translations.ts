@@ -82,8 +82,7 @@ export const translations = {
     confirmationVehicle: "Vehicle",
     confirmationAppointment: "Appointment",
     couponCodeInstruction: "Here is your exclusive savings code. Show it at the shop to get your discount:",
-
-
+    
     testimonialsTitle: 'Trusted by Elgin Drivers',
     testimonialsSubtitle: 'See why 25,000+ customers won’t go anywhere else.',
     loadMore: 'Load More Reviews',

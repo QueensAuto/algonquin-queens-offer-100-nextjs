@@ -3,11 +3,13 @@
 type BookingData = {
   'first-name': string;
   'last-name': string;
+  'full-name': string;
   email: string;
   'mobile-number': string;
   'vehicle-year': string;
   'vehicle-make': string;
   'vehicle-model': string;
+  vehicle: string;
   date: string;
   time: string;
   [key: string]: unknown;
