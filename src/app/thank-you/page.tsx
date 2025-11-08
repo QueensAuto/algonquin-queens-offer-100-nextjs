@@ -33,8 +33,11 @@ function ThankYouContent() {
   const animationFrameIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    setCouponCode(sessionStorage.getItem('userCouponCode') || '');
-    setAudioUrl(sessionStorage.getItem('customAudioUrl') || '');
+    const code = sessionStorage.getItem('userCouponCode');
+    const audio = sessionStorage.getItem('customAudioUrl');
+    
+    if (code) setCouponCode(code);
+    if (audio) setAudioUrl(audio);
     
     const colors = ['#22d3ee', '#3b82f6', '#ffffff', '#a78bfa'];
     const end = Date.now() + 3 * 1000;
@@ -117,12 +120,26 @@ function ThankYouContent() {
   };
 
   return (
-    <div className="relative overflow-hidden breathing-gradient-background">
+    <div className="relative overflow-hidden">
+        <div className="fixed inset-0 z-0 overflow-hidden">
+            <div
+              className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+              style={{ animation: 'blob-anim 15s infinite alternate' }}
+            ></div>
+            <div
+              className="absolute top-40 right-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+              style={{ animation: 'blob-anim 20s infinite alternate-reverse' }}
+            ></div>
+            <div
+              className="absolute -bottom-20 left-1/3 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+              style={{ animation: 'blob-anim 25s infinite alternate' }}
+            ></div>
+        </div>
         <Header />
         <main className="flex-grow">
             <motion.section 
                 id="thank-you-hero" 
-                className="py-16 px-4 text-center"
+                className="relative z-10 pt-28 pb-16 px-4 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -147,7 +164,7 @@ function ThankYouContent() {
                 </div>
             </motion.section>
 
-            <section id="confirmation-details" className="pb-24 px-4">
+            <section id="confirmation-details" className="relative z-10 pb-24 px-4">
                  <div className="max-w-3xl mx-auto space-y-8">
                     {couponCode && (
                       <motion.div 
