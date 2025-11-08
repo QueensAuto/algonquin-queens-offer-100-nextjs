@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Suspense, useEffect, useState, useRef, useCallback } from 'react';
@@ -25,52 +26,87 @@ function ThankYouContent() {
   const [copied, setCopied] = useState(false);
   const [audioStatus, setAudioStatus] = useState<'idle' | 'playing'>('idle');
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const animationFrameIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Fire confetti on mount
+    setCouponCode(sessionStorage.getItem('userCouponCode') || '');
+    setAudioUrl(sessionStorage.getItem('customAudioUrl') || '');
+    
     const colors = ['#22d3ee', '#3b82f6', '#ffffff', '#a78bfa'];
     const end = Date.now() + 3 * 1000;
 
     const frame = () => {
       if (Date.now() > end) return;
-
-      confetti({
-        particleCount: 3,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0, y: 0.8 },
-        colors: colors,
-      });
-      confetti({
-        particleCount: 3,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1, y: 0.8 },
-        colors: colors,
-      });
-
+      confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0, y: 0.8 }, colors: colors });
+      confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1, y: 0.8 }, colors: colors });
       requestAnimationFrame(frame);
     };
     
     setTimeout(() => confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: colors }), 500);
     frame();
-
-
-    // Retrieve data from session storage
-    setCouponCode(sessionStorage.getItem('userCouponCode') || '');
-    setAudioUrl(sessionStorage.getItem('customAudioUrl') || '');
-
   }, []);
 
-  const formattedDate = useCallback(() => {
-    if (!appointment) return '';
-    const [datePart] = appointment.split(' at ');
-    if (!datePart) return '';
-    const date = new Date(datePart.replace(/-/g, '/'));
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return new Intl.DateTimeFormat(language, options).format(date);
-  }, [appointment, language]);
+  const draw = useCallback(() => {
+    if (!analyserRef.current || !canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+    analyserRef.current.getByteFrequencyData(dataArray);
 
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const barWidth = (canvas.width / dataArray.length) * 2.5;
+    let barHeight;
+    let x = 0;
+
+    for(let i = 0; i < dataArray.length; i++) {
+        barHeight = dataArray[i] / 2;
+        ctx.fillStyle = `rgba(34, 211, 238, ${barHeight / 150})`;
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+        x += barWidth + 1;
+    }
+    animationFrameIdRef.current = requestAnimationFrame(draw);
+  }, []);
+
+  const handlePlayAudio = () => {
+      if (audioUrl) {
+          if (!audioRef.current) {
+              const newAudio = new Audio(audioUrl);
+              audioRef.current = newAudio;
+              
+              if (!audioContextRef.current) {
+                  audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+                  analyserRef.current = audioContextRef.current.createAnalyser();
+                  analyserRef.current.fftSize = 256;
+                  sourceRef.current = audioContextRef.current.createMediaElementSource(newAudio);
+                  sourceRef.current.connect(analyserRef.current);
+                  analyserRef.current.connect(audioContextRef.current.destination);
+              }
+              
+              newAudio.onplay = () => {
+                setAudioStatus('playing');
+                draw();
+              };
+              newAudio.onpause = () => {
+                setAudioStatus('idle');
+                if(animationFrameIdRef.current) cancelAnimationFrame(animationFrameIdRef.current);
+              };
+              newAudio.onended = () => {
+                setAudioStatus('idle');
+                if(animationFrameIdRef.current) cancelAnimationFrame(animationFrameIdRef.current);
+              };
+          }
+          if (audioContextRef.current?.state === 'suspended') {
+              audioContextRef.current.resume();
+          }
+          audioRef.current.play().catch(e => console.error("Audio playback failed", e));
+      }
+  };
 
   const handleCopy = () => {
     if (couponCode) {
@@ -79,23 +115,6 @@ function ThankYouContent() {
       setTimeout(() => setCopied(false), 2000);
     }
   };
-
-  const handlePlayAudio = () => {
-      if (audioUrl) {
-          if (audioRef.current) {
-              audioRef.current.play();
-          } else {
-              const newAudio = new Audio(audioUrl);
-              audioRef.current = newAudio;
-              newAudio.onplay = () => setAudioStatus('playing');
-              newAudio.onended = () => {
-                  setAudioStatus('idle');
-              };
-              newAudio.play().catch(e => console.error("Audio playback failed", e));
-          }
-      }
-  };
-
 
   return (
     <div className="relative overflow-hidden breathing-gradient-background">
@@ -117,15 +136,16 @@ function ThankYouContent() {
                     <p className="mt-4 text-lg text-slate-300">{t('thankYouSubtitle')}</p>
                     
                     {audioUrl && (
-                        <div className="mt-8">
+                        <div className="mt-8 flex flex-col items-center gap-4">
                             <Button onClick={handlePlayAudio} disabled={audioStatus === 'playing'} className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-white text-lg font-bold rounded-full shadow-lg shadow-sky-500/30 hover:shadow-sky-400/50 transition-all duration-300 transform hover:scale-105">
                                 {audioStatus === 'playing' ? <Volume2 className="w-6 h-6 animate-pulse" /> : <Play className="w-6 h-6" />}
                                 <span>{audioStatus === 'playing' ? t('playingAudio') : t('playMessageFor', { name })}</span>
                             </Button>
+                            <canvas ref={canvasRef} width="300" height="50" className="transition-opacity duration-300" style={{opacity: audioStatus === 'playing' ? 1: 0}}/>
                         </div>
                     )}
                 </div>
-            </section>
+            </motion.section>
 
             <section id="confirmation-details" className="pb-24 px-4">
                  <div className="max-w-3xl mx-auto space-y-8">
