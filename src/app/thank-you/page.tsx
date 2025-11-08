@@ -25,6 +25,7 @@ function ThankYouContent() {
   const [audioUrl, setAudioUrl] = useState('');
   const [copied, setCopied] = useState(false);
   const [audioStatus, setAudioStatus] = useState<'idle' | 'playing'>('idle');
+  const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -78,6 +79,10 @@ function ThankYouContent() {
 
   const handlePlayAudio = () => {
       if (audioUrl) {
+          if (!hasBeenPlayed) {
+            setHasBeenPlayed(true);
+          }
+
           if (!audioRef.current) {
               const newAudio = new Audio(audioUrl);
               audioRef.current = newAudio;
@@ -154,7 +159,11 @@ function ThankYouContent() {
                     
                     {audioUrl && (
                         <div className="mt-8 flex flex-col items-center gap-4">
-                            <Button onClick={handlePlayAudio} disabled={audioStatus === 'playing'} className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-white text-lg font-bold rounded-full shadow-lg shadow-sky-500/30 hover:shadow-sky-400/50 transition-all duration-300 transform hover:scale-105">
+                            <Button 
+                              onClick={handlePlayAudio} 
+                              disabled={audioStatus === 'playing'} 
+                              className={`inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-sky-400 to-indigo-500 text-white text-lg font-bold rounded-full shadow-lg shadow-sky-500/30 hover:shadow-sky-400/50 transition-all duration-300 transform hover:scale-105 ${!hasBeenPlayed ? 'btn-pulse' : ''}`}
+                            >
                                 {audioStatus === 'playing' ? <Volume2 className="w-6 h-6 animate-pulse" /> : <Play className="w-6 h-6" />}
                                 <span>{audioStatus === 'playing' ? t('playingAudio') : t('playMessageFor', { name })}</span>
                             </Button>
