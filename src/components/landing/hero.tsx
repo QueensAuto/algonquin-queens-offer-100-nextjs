@@ -60,16 +60,23 @@ export default function Hero() {
           </div>
 
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">
-            <div style={{ display: language === 'en' ? 'block' : 'none' }}>
-              <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
-              <Script src="https://fast.wistia.com/embed/dpxrr6otfn.js" async type="module"></Script>
-              <wistia-player media-id="dpxrr6otfn" aspect="1.7777777777777777"></wistia-player>
-            </div>
-            <div style={{ display: language === 'es' ? 'block' : 'none' }}>
-               <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
-               <Script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module"></Script>
-               <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
-            </div>
+            {isMounted && (
+              <>
+                <div style={{ display: language === 'en' ? 'block' : 'none' }}>
+                  <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
+                  <Script src="https://fast.wistia.com/embed/dpxrr6otfn.js" async type="module"></Script>
+                  <wistia-player media-id="dpxrr6otfn" aspect="1.7777777777777777"></wistia-player>
+                </div>
+                <div style={{ display: language === 'es' ? 'block' : 'none' }}>
+                  <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
+                  <Script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module"></Script>
+                  <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
+                </div>
+              </>
+            )}
+            {!isMounted && (
+              <div className="w-full" style={{ paddingTop: '56.25%', background: '#0f172a' }}></div>
+            )}
           </div>
 
           <div className="mt-12 text-center">
