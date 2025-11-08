@@ -97,7 +97,7 @@ export const translations = {
     phoneNumberLink: "tel:+18478441700",
     whereToFindUsTitle: "Where to Find Us",
     getDirections: "Get Directions",
-    googleMapsLink: "https://maps.app.goo.gl/daKvFc9wsLfoMAyw8",
+    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=2401+E+Algonquin+Rd,+Algonquin,+IL+60102",
     
     testimonialsTitle: 'Trusted by Algonquin Drivers',
     testimonialsSubtitle: 'See why 25,000+ customers won’t go anywhere else.',
@@ -237,7 +237,7 @@ export const translations = {
     phoneNumberLink: "tel:+18478441700",
     whereToFindUsTitle: "Dónde Encontrarnos",
     getDirections: "Obtener Direcciones",
-    googleMapsLink: "https://maps.app.goo.gl/daKvFc9wsLfoMAyw8",
+    googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=2401+E+Algonquin+Rd,+Algonquin,+IL+60102",
     
     testimonialsTitle: 'Con la Confianza de los Conductores de Algonquin',
     testimonialsSubtitle: 'Descubre por qué más de 25,000 clientes no van a ningún otro lado.',
