@@ -281,6 +281,3 @@ export const translations = {
     popupCTAV2: 'Reclamar Mi Paquete →',
   },
 };
-
-    
-    
