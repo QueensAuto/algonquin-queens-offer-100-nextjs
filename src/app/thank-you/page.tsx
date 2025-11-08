@@ -125,7 +125,7 @@ function ThankYouContent() {
                         </div>
                     )}
                 </div>
-            </motion.section>
+            </section>
 
             <section id="confirmation-details" className="pb-24 px-4">
                  <div className="max-w-3xl mx-auto space-y-8">
