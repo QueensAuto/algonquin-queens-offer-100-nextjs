@@ -96,7 +96,7 @@ export const translations = {
     phoneNumberLink: "tel:+12246353000",
     whereToFindUsTitle: "Where to Find Us",
     getDirections: "Get Directions",
-    googleMapsLink: "https://maps.google.com/?q=Queens+Auto+Service+1303+Dundee+Ave+Elgin+IL",
+    googleMapsLink: "https://maps.app.goo.gl/daKvFc9wsLfoMAyw8",
     
     testimonialsTitle: 'Trusted by Elgin Drivers',
     testimonialsSubtitle: 'See why 25,000+ customers won’t go anywhere else.',
@@ -236,7 +236,7 @@ export const translations = {
     phoneNumberLink: "tel:+12246353000",
     whereToFindUsTitle: "Dónde Encontrarnos",
     getDirections: "Obtener Direcciones",
-    googleMapsLink: "https://maps.google.com/?q=Queens+Auto+Service+1303+Dundee+Ave+Elgin+IL",
+    googleMapsLink: "https://maps.app.goo.gl/daKvFc9wsLfoMAyw8",
     
     testimonialsTitle: 'Con la Confianza de los Conductores de Elgin',
     testimonialsSubtitle: 'Descubre por qué más de 25,000 clientes no van a ningún otro lado.',
