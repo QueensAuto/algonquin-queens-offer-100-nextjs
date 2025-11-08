@@ -214,7 +214,7 @@ body {
     fill: none;
     stroke-dasharray: 500;
     stroke-dashoffset: 500;
-    animation: draw-underline 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
+    animation: draw-underline 2s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
   }
 
   @keyframes draw-underline {
