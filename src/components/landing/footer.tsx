@@ -1,3 +1,4 @@
+
 'use client';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/use-translation';
@@ -26,8 +27,10 @@ export default function Footer() {
             {t('termsOfUse')}
           </Link>
         </p>
-        <p className="mt-2">1303 Dundee Ave, Elgin, IL 60120</p>
+        <p className="mt-2">2401 E Algonquin Rd, Algonquin, IL 60102</p>
       </div>
     </footer>
   );
 }
+
+    

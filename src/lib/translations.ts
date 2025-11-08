@@ -1,3 +1,4 @@
+
 export const translations = {
   en: {
     bookNowNav: 'Book Now',
@@ -92,13 +93,13 @@ export const translations = {
     whatHappensNextStep3: "Head to the shop at your scheduled time. We'll be ready for you!",
     needToRescheduleTitle: "Need to Reschedule?",
     needToRescheduleBody: "No problem. Give us a call and we'll find a better time.",
-    phoneNumber: "(224) 635-3000",
-    phoneNumberLink: "tel:+12246353000",
+    phoneNumber: "(847) 844-1700",
+    phoneNumberLink: "tel:+18478441700",
     whereToFindUsTitle: "Where to Find Us",
     getDirections: "Get Directions",
-    googleMapsLink: "https://maps.app.goo.gl/daKvFc9wsLfoMAyw8",
+    googleMapsLink: "https://maps.app.goo.gl/u5bNo3e1QTDR9a6F9",
     
-    testimonialsTitle: 'Trusted by Elgin Drivers',
+    testimonialsTitle: 'Trusted by Algonquin Drivers',
     testimonialsSubtitle: 'See why 25,000+ customers won’t go anywhere else.',
     loadMore: 'Load More Reviews',
     
@@ -106,7 +107,7 @@ export const translations = {
     aboutTitle: 'Driven by Passion for Cars — and Care for People.',
     aboutBody: 'At Queens Auto, we’re not a big chain — we’re a neighborhood shop built on trust, transparency, and true passion for what we do. Every car that comes through our doors gets treated like family, and every customer drives out knowing they got real value — not gimmicks.',
     aboutTagline: 'Real people. Real service. We fix the car — and the stress.',
-    address: '1303 Dundee Ave, Elgin, IL 60120',
+    address: '2401 E Algonquin Rd, Algonquin, IL 60102',
     
     faqTitle: 'Frequently Asked Questions',
     faqQ1: 'How does the “Up to $100 Off” offer work?',
@@ -118,9 +119,9 @@ export const translations = {
     faqQ4: 'Does this work for online and in-store appointments?',
     faqA4: 'Yes. Claim your savings online here, then bring your vehicle in for service. Just mention your coupon when you check in at Queens Auto Service.',
     
-    serviceAreaTitle: 'Proudly Serving Elgin & Beyond',
-    serviceAreaSubtitle: 'Your savings code is valid at our convenient Elgin location.',
-    serviceAreaList: 'Including Elgin, South Elgin, West Dundee, Sleepy Hollow, Gilberts, Streamwood, and Bartlett.',
+    serviceAreaTitle: 'Proudly Serving Algonquin & Beyond',
+    serviceAreaSubtitle: 'Your savings code is valid at our convenient Algonquin location.',
+    serviceAreaList: 'Including Algonquin, South Algonquin, West Dundee, Sleepy Hollow, Gilberts, Streamwood, and Bartlett.',
     
     privacyPolicy: 'Privacy Policy',
     termsOfUse: 'Terms of Use',
@@ -232,13 +233,13 @@ export const translations = {
     whatHappensNextStep3: "Dirígete al taller a la hora programada. ¡Estaremos listos para ti!",
     needToRescheduleTitle: "¿Necesitas Reprogramar?",
     needToRescheduleBody: "No hay problema. Llámanos y encontraremos un mejor momento.",
-    phoneNumber: "(224) 635-3000",
-    phoneNumberLink: "tel:+12246353000",
+    phoneNumber: "(847) 844-1700",
+    phoneNumberLink: "tel:+18478441700",
     whereToFindUsTitle: "Dónde Encontrarnos",
     getDirections: "Obtener Direcciones",
-    googleMapsLink: "https://maps.app.goo.gl/daKvFc9wsLfoMAyw8",
+    googleMapsLink: "https://maps.app.goo.gl/u5bNo3e1QTDR9a6F9",
     
-    testimonialsTitle: 'Con la Confianza de los Conductores de Elgin',
+    testimonialsTitle: 'Con la Confianza de los Conductores de Algonquin',
     testimonialsSubtitle: 'Descubre por qué más de 25,000 clientes no van a ningún otro lado.',
     loadMore: 'Cargar Más Reseñas',
 
@@ -246,7 +247,7 @@ export const translations = {
     aboutTitle: 'Impulsados por la Pasión por los Autos — y el Cuidado por las Personas.',
     aboutBody: 'En Queens Auto, no somos una gran cadena — somos un taller de barrio construido sobre la confianza, la transparencia y la verdadera pasión por lo que hacemos. Cada auto es tratado como de la familia.',
     aboutTagline: 'Gente real. Servicio real. Arreglamos el auto y el estrés.',
-    address: '1303 Dundee Ave, a 2 cuadras de la I-90, Elgin',
+    address: '2401 E Algonquin Rd, Algonquin, IL 60102',
 
     faqTitle: 'Preguntas Frecuentes',
     faqQ1: '¿Cómo funciona la oferta de “Hasta $100 de Descuento”?',
@@ -258,9 +259,9 @@ export const translations = {
     faqQ4: '¿Funciona para citas en línea y en la tienda?',
     faqA4: 'Sí. Reclama tus ahorros en línea aquí, y luego trae tu vehículo para el servicio. Solo menciona tu cupón cuando te registres en Queens Auto Service.',
     
-    serviceAreaTitle: 'Sirviendo con Orgullo a Elgin y sus Alrededores',
-    serviceAreaSubtitle: 'Tu código de ahorro es válido en nuestra conveniente ubicación de Elgin.',
-    serviceAreaList: 'Incluyendo Elgin, South Elgin, West Dundee, Sleepy Hollow, Gilberts, Streamwood y Bartlett.',
+    serviceAreaTitle: 'Sirviendo con Orgullo a Algonquin y sus Alrededores',
+    serviceAreaSubtitle: 'Tu código de ahorro es válido en nuestra conveniente ubicación de Algonquin.',
+    serviceAreaList: 'Incluyendo Algonquin, South Algonquin, West Dundee, Sleepy Hollow, Gilberts, Streamwood y Bartlett.',
 
     privacyPolicy: 'Política de Privacidad',
     termsOfUse: 'Términos de Uso',
@@ -280,3 +281,5 @@ export const translations = {
     popupCTAV2: 'Reclamar Mi Paquete →',
   },
 };
+
+    
