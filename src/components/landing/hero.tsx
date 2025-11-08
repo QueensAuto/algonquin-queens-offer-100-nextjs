@@ -38,9 +38,20 @@ export default function Hero() {
           <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
             {t('heroSubtitle')}
           </p>
-          <div className="mt-4 text-base text-cyan-400 font-semibold max-w-2xl mx-auto flex items-center justify-center gap-2">
-            <Sparkles className="inline-block w-4 h-4" /> 
-            <span className="underline-animate">{t('heroOffer')}</span>
+          <div className="mt-4 text-base text-cyan-400 font-semibold flex items-center justify-center gap-2">
+            <Sparkles className="inline-block w-4 h-4" />
+            <div className="underline-animate-wrapper">
+              <span>{t('heroOffer')}</span>
+              <svg className="underline-animate-svg" viewBox="0 0 100 12" preserveAspectRatio="none">
+                <path className="underline-animate-path" d="M2 8 C 20 12, 80 0, 98 6" filter="url(#crayon-filter)"/>
+                <defs>
+                    <filter id="crayon-filter">
+                      <feTurbulence type="fractalNoise" baseFrequency="0.1 0.5" numOctaves="1" result="turbulence"/>
+                      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+                    </filter>
+                </defs>
+              </svg>
+            </div>
           </div>
 
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">

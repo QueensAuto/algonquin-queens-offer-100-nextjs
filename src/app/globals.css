@@ -193,32 +193,33 @@ body {
   input[type=range]::-moz-range-track { width: 100%; height: 8px; cursor: pointer; background: #1e293b; border-radius: 5px; border: 1px solid #334155; }
   input[type=range]::-moz-range-thumb { height: 20px; width: 20px; border-radius: 50%; background: white; cursor: pointer; border: 4px solid #3b82f6; box-shadow: 0 0 10px #3b82f6; }
 
-  .underline-animate {
+  .underline-animate-wrapper {
     position: relative;
-  }
-
-  .underline-animate::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: hsl(var(--primary));
-    transform-origin: bottom right;
-    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-    animation: underline-in 0.8s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    display: inline-block;
   }
   
-  @keyframes underline-in {
-    from {
-      transform: scaleX(0);
-      transform-origin: bottom left;
-    }
+  .underline-animate-svg {
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    overflow: visible;
+  }
+
+  .underline-animate-path {
+    stroke: #22d3ee;
+    stroke-width: 3;
+    stroke-linecap: round;
+    fill: none;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: draw-underline 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
+  }
+
+  @keyframes draw-underline {
     to {
-      transform: scaleX(1);
-      transform-origin: bottom left;
+      stroke-dashoffset: 0;
     }
-  }  
+  }
 }
