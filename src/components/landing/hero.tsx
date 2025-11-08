@@ -3,11 +3,16 @@ import { useTranslation } from '@/hooks/use-translation';
 import { useLanguage } from '@/context/language-context';
 import Script from 'next/script';
 import { Sparkles } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Hero() {
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -43,7 +48,7 @@ export default function Hero() {
             <div className="underline-animate-wrapper">
               <span>{t('heroOffer')}</span>
               <svg className="underline-animate-svg" viewBox="0 0 100 12" preserveAspectRatio="none">
-                <path className="underline-animate-path" d="M2 8 C 20 12, 80 0, 98 6" filter="url(#crayon-filter)"/>
+                <path className={isMounted ? "underline-animate-path" : ""} d="M2 8 C 20 12, 80 0, 98 6" filter="url(#crayon-filter)"/>
                 <defs>
                     <filter id="crayon-filter">
                       <feTurbulence type="fractalNoise" baseFrequency="0.1 0.5" numOctaves="1" result="turbulence"/>
@@ -56,10 +61,12 @@ export default function Hero() {
 
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">
             <div style={{ display: language === 'en' ? 'block' : 'none' }}>
+              <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
               <Script src="https://fast.wistia.com/embed/dpxrr6otfn.js" async type="module"></Script>
               <wistia-player media-id="dpxrr6otfn" aspect="1.7777777777777777"></wistia-player>
             </div>
             <div style={{ display: language === 'es' ? 'block' : 'none' }}>
+               <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
                <Script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module"></Script>
                <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
             </div>
