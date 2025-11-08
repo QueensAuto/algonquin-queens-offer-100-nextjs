@@ -19,8 +19,6 @@ export default function Hero() {
 
   return (
     <>
-      <Script src="https://fast.wistia.com/embed/dpxrr6otfn.js" async type="module" strategy="lazyOnload"></Script>
-      <Script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module" strategy="lazyOnload"></Script>
       <style dangerouslySetInnerHTML={{__html: `
         wistia-player[media-id='dpxrr6otfn']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/dpxrr6otfn/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }
         wistia-player[media-id='7759m49oox']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/7759m49oox/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }
@@ -40,14 +38,18 @@ export default function Hero() {
           <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
             {t('heroSubtitle')}
           </p>
-          <p className="mt-4 text-base text-cyan-400 font-semibold max-w-2xl mx-auto flex items-center justify-center gap-2" dangerouslySetInnerHTML={{ __html: t('heroOffer') || '' }}>
-          </p>
+          <div className="mt-4 text-base text-cyan-400 font-semibold max-w-2xl mx-auto flex items-center justify-center gap-2">
+            <Sparkles className="inline-block w-4 h-4" /> 
+            <span className="underline-animate">{t('heroOffer')}</span>
+          </div>
 
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">
             <div style={{ display: language === 'en' ? 'block' : 'none' }}>
+              <Script src="https://fast.wistia.com/embed/dpxrr6otfn.js" async type="module"></Script>
               <wistia-player media-id="dpxrr6otfn" aspect="1.7777777777777777"></wistia-player>
             </div>
             <div style={{ display: language === 'es' ? 'block' : 'none' }}>
+               <Script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module"></Script>
                <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
             </div>
           </div>

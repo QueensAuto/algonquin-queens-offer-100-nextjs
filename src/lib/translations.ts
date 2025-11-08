@@ -4,7 +4,7 @@ export const translations = {
     heroTitlePre: 'Save Up to $100',
     heroTitlePost: 'on Your Next Auto Repair',
     heroSubtitle: 'Book online to get an instant savings code. The more you spend, the more you save.',
-    heroOffer: '<i data-lucide="sparkles" class="inline-block w-4 h-4 mr-1"></i> Exclusive Online Offer',
+    heroOffer: 'Exclusive Online Offer',
     heroCTA: 'GET MY SAVINGS NOW',
     ctaUrgency: 'Exclusive Online Offer – Valid This Month Only',
     
@@ -144,7 +144,7 @@ export const translations = {
     heroTitlePre: 'Ahorra Hasta $100',
     heroTitlePost: 'en tu Próxima Reparación',
     heroSubtitle: 'Reserva en línea para obtener un código de ahorro al instante. Cuanto más gastas, más ahorras.',
-    heroOffer: '<i data-lucide="sparkles" class="inline-block w-4 h-4 mr-1"></i> Oferta Exclusiva en Línea',
+    heroOffer: 'Oferta Exclusiva en Línea',
     heroCTA: 'OBTENER MIS AHORROS AHORA',
     ctaUrgency: 'Oferta Exclusiva en Línea – Válida Solo Este Mes',
     
@@ -280,5 +280,3 @@ export const translations = {
     popupCTAV2: 'Reclamar Mi Paquete →',
   },
 };
-
-    
