@@ -19,7 +19,13 @@ export default function Hero() {
 
   return (
     <>
-      <Script src="https://fast.wistia.com/player.js" async />
+      <Script src="https://fast.wistia.com/embed/dpxrr6otfn.js" async type="module" strategy="lazyOnload"></Script>
+      <Script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module" strategy="lazyOnload"></Script>
+      <style dangerouslySetInnerHTML={{__html: `
+        wistia-player[media-id='dpxrr6otfn']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/dpxrr6otfn/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }
+        wistia-player[media-id='7759m49oox']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/7759m49oox/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }
+      `}}></style>
+
       <section
         id="hero-section"
         className="relative text-center pt-28 pb-20 sm:pt-24 sm:pb-20 px-4"
@@ -39,31 +45,10 @@ export default function Hero() {
 
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">
             <div style={{ display: language === 'en' ? 'block' : 'none' }}>
-              <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
+              <wistia-player media-id="dpxrr6otfn" aspect="1.7777777777777777"></wistia-player>
             </div>
             <div style={{ display: language === 'es' ? 'block' : 'none' }}>
-              <div
-                className="wistia_responsive_padding"
-                style={{ padding: '56.25% 0 0 0', position: 'relative' }}
-              >
-                <div
-                  className="wistia_responsive_wrapper"
-                  style={{
-                    height: '100%',
-                    left: '0',
-                    position: 'absolute',
-                    top: '0',
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    className="wistia_embed wistia_async_u9od4mapw5 videoFoam=true"
-                    style={{ height: '100%', position: 'relative', width: '100%' }}
-                  >
-                    &nbsp;
-                  </div>
-                </div>
-              </div>
+               <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
             </div>
           </div>
 
