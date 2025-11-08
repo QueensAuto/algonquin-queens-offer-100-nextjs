@@ -19,7 +19,7 @@ type BookingData = {
 export async function submitBooking(data: BookingData) {
   console.log('New Booking Submitted:', data);
 
-  const webhookUrl = 'https://n8n.queensautoservices.com/webhook-test/465c85ff-f19e-4d8b-8907-c806cc9fc07b';
+  const webhookUrl = 'https://n8n.queensautoservices.com/webhook/465c85ff-f19e-4d8b-8907-c806cc9fc07b';
 
   const webhookPayload = {
     "First Name": data['first-name'] || null,
