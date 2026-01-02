@@ -6,5 +6,5 @@ export interface WistiaVideo {
 
 export interface WistiaAPI {
   (hashedId: string): WistiaVideo | undefined;
-  // Add other global methods if needed
+  api: (hashedId: string) => WistiaVideo | undefined;
 }

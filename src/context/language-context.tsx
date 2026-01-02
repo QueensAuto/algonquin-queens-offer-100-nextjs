@@ -15,9 +15,10 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 declare global {
-    interface Window {
-        Wistia?: WistiaAPI;
-    }
+  interface Window {
+    Wistia?: WistiaAPI;
+    _wq?: any[];
+  }
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -37,24 +38,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLanguageState(lang);
     localStorage.setItem('preferredLanguage', lang);
     document.documentElement.lang = lang;
-    
-    const wistiaEnContainer = document.getElementById('wistia-en-container');
-    const wistiaEsContainer = document.getElementById('wistia-es-container');
 
+    // Use Wistia's queue to pause the other commercial when switching
+    window._wq = window._wq || [];
     if (lang === 'es') {
-        if(wistiaEnContainer) wistiaEnContainer.classList.add('hidden');
-        if(wistiaEsContainer) wistiaEsContainer.classList.remove('hidden');
-        if (window.Wistia && window.Wistia.api) { 
-            const enVideo = window.Wistia.api('7759m49oox'); 
-            if (enVideo) enVideo.pause(); 
-        }
+      window._wq.push({
+        id: 'dpxrr6otfn',
+        onReady: (video: any) => video.pause()
+      });
     } else {
-        if(wistiaEnContainer) wistiaEnContainer.classList.remove('hidden');
-        if(wistiaEsContainer) wistiaEsContainer.classList.add('hidden');
-        if (window.Wistia && window.Wistia.api) { 
-            const esVideo = window.Wistia.api('u9od4mapw5'); 
-            if (esVideo) esVideo.pause(); 
-        }
+      window._wq.push({
+        id: '7759m49oox',
+        onReady: (video: any) => video.pause()
+      });
     }
   }, []);
 

@@ -26,20 +26,20 @@ export default function Testimonials() {
   return (
     <section className="py-24 px-4" itemScope itemType="http://schema.org/AutoRepair">
       <meta itemProp="name" content="Queens Auto Service" />
-      <meta itemProp="image" content="https://queensautoserviceselgin.com/wp-content/uploads/2024/11/Logo-White.webp" />
+      <meta itemProp="image" content="/images/Logo-White.webp" />
       <meta itemProp="telephone" content="+1-224-635-3000" />
       <address itemProp="address" itemScope itemType="http://schema.org/PostalAddress" className="hidden">
-        <span itemProp="streetAddress">1303 Dundee Ave</span>,
-        <span itemProp="addressLocality">Elgin</span>,
+        <span itemProp="streetAddress">2401 E Algonquin Rd</span>,
+        <span itemProp="addressLocality">Algonquin</span>,
         <span itemProp="addressRegion">IL</span>
-        <span itemProp="postalCode">60120</span>
+        <span itemProp="postalCode">60102</span>
       </address>
       <div itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating" className="hidden">
         <meta itemProp="ratingValue" content="4.9" />
         <meta itemProp="reviewCount" content="52" />
       </div>
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-center text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
+        <h2 className="text-4xl font-extrabold text-center text-white" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
           {t('testimonialsTitle')}
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-center text-slate-400">
@@ -55,13 +55,13 @@ export default function Testimonials() {
                 <QuoteIcon />
               </div>
               <div className="relative z-10 flex flex-col flex-grow">
-                 <p className="text-base text-slate-300 leading-relaxed flex-grow">
+                <p className="text-base text-slate-300 leading-relaxed flex-grow">
                   {review.text.length > 150 ? review.text.substring(0, 150) + "..." : review.text}
                 </p>
               </div>
               <div className="relative z-10 flex items-center mt-6 pt-6 border-t border-slate-800">
                 <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center text-white text-lg font-bold mr-4">
-                  {review.name.split(" ").map((n) => n[0]).join("").substring(0,2)}
+                  {review.name.split(" ").map((n) => n[0]).join("").substring(0, 2)}
                 </div>
                 <div>
                   <h4 className="font-semibold text-white">{review.name}</h4>

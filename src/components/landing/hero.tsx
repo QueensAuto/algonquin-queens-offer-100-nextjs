@@ -24,7 +24,8 @@ export default function Hero() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         wistia-player[media-id='dpxrr6otfn']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/dpxrr6otfn/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }
         wistia-player[media-id='7759m49oox']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/7759m49oox/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }
       `}}></style>
@@ -34,7 +35,7 @@ export default function Hero() {
         className="relative text-center pt-28 pb-20 sm:pt-24 sm:pb-20 px-4"
       >
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white" style={{fontFamily: "'Plus Jakarta Sans', sans-serif"}}>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               {t('heroTitlePre')}
             </span>{' '}
@@ -48,12 +49,12 @@ export default function Hero() {
             <div className="underline-animate-wrapper">
               <span>{t('heroOffer')}</span>
               <svg className="underline-animate-svg" viewBox="0 0 100 12" preserveAspectRatio="none">
-                <path className={isMounted ? "underline-animate-path" : ""} d="M2 8 C 20 12, 80 0, 98 6" filter="url(#crayon-filter)"/>
+                <path className={isMounted ? "underline-animate-path" : ""} d="M2 8 C 20 12, 80 0, 98 6" filter="url(#crayon-filter)" />
                 <defs>
-                    <filter id="crayon-filter">
-                      <feTurbulence type="fractalNoise" baseFrequency="0.1 0.5" numOctaves="1" result="turbulence"/>
-                      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
-                    </filter>
+                  <filter id="crayon-filter">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.1 0.5" numOctaves="1" result="turbulence" />
+                    <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.5" xChannelSelector="R" yChannelSelector="G" />
+                  </filter>
                 </defs>
               </svg>
             </div>
@@ -62,14 +63,10 @@ export default function Hero() {
           <div className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border-2 border-slate-800">
             {isMounted && (
               <>
-                <div style={{ display: language === 'en' ? 'block' : 'none' }}>
-                  <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
-                  <Script src="https://fast.wistia.com/embed/dpxrr6otfn.js" async type="module"></Script>
+                <div id="wistia-en-container" style={{ display: language === 'en' ? 'block' : 'none' }}>
                   <wistia-player media-id="dpxrr6otfn" aspect="1.7777777777777777"></wistia-player>
                 </div>
-                <div style={{ display: language === 'es' ? 'block' : 'none' }}>
-                  <Script src="https://fast.wistia.com/player.js" async type="module"></Script>
-                  <Script src="https://fast.wistia.com/embed/7759m49oox.js" async type="module"></Script>
+                <div id="wistia-es-container" style={{ display: language === 'es' ? 'block' : 'none' }}>
                   <wistia-player media-id="7759m49oox" aspect="1.7777777777777777"></wistia-player>
                 </div>
               </>

@@ -29,12 +29,12 @@ export default function Header() {
 
     const progressEl = document.getElementById('scroll-progress');
     const updateScrollProgress = () => {
-        const h = document.documentElement;
-        const st = h.scrollTop || document.body.scrollTop;
-        const sh = h.scrollHeight - h.clientHeight;
-        if (progressEl) {
-            progressEl.style.width = (sh ? (st / sh) * 100 : 0) + '%';
-        }
+      const h = document.documentElement;
+      const st = h.scrollTop || document.body.scrollTop;
+      const sh = h.scrollHeight - h.clientHeight;
+      if (progressEl) {
+        progressEl.style.width = (sh ? (st / sh) * 100 : 0) + '%';
+      }
     }
     window.addEventListener('scroll', updateScrollProgress);
 
@@ -55,26 +55,25 @@ export default function Header() {
 
   return (
     <>
-      <div id="scroll-progress" className="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-400 to-purple-400 z-[60]" style={{width: '0%'}}/>
+      <div id="scroll-progress" className="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-400 to-purple-400 z-[60]" style={{ width: '0%' }} />
       <header
         id="site-header"
-        className={`fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-black/70 border-b transition-all duration-300 will-change-transform ${
-          scrolled ? 'border-white/5' : 'border-transparent'
-        } ${!headerVisible ? '-translate-y-full' : ''}`}
+        className={`fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-black/70 border-b transition-all duration-300 will-change-transform ${scrolled ? 'border-white/5' : 'border-transparent'
+          } ${!headerVisible ? '-translate-y-full' : ''}`}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16">
           <div className="h-full flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-md">
               <Image
-                src="https://queensautoserviceselgin.com/wp-content/uploads/2024/11/Logo-White.webp"
+                src="/images/Logo-White.webp"
                 alt="Queens Auto Services Logo"
                 width={160}
                 height={40}
                 className="h-10 w-auto"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.onerror = null; 
-                  target.src='https://placehold.co/200x50/0f172a/ffffff?text=Logo';
+                  target.onerror = null;
+                  target.src = 'https://placehold.co/200x50/0f172a/ffffff?text=Logo';
                 }}
               />
             </Link>
@@ -82,18 +81,16 @@ export default function Header() {
               <div className="text-sm">
                 <button
                   onClick={() => setLanguage('en')}
-                  className={`transition-colors hover:text-cyan-400 ${
-                    language === 'en' ? 'font-bold text-white' : 'text-slate-400'
-                  }`}
+                  className={`transition-colors hover:text-cyan-400 ${language === 'en' ? 'font-bold text-white' : 'text-slate-400'
+                    }`}
                 >
                   Eng
                 </button>
                 <span className="text-slate-500 mx-1">|</span>
                 <button
                   onClick={() => setLanguage('es')}
-                  className={`transition-colors hover:text-cyan-400 ${
-                    language === 'es' ? 'font-bold text-white' : 'text-slate-400'
-                  }`}
+                  className={`transition-colors hover:text-cyan-400 ${language === 'es' ? 'font-bold text-white' : 'text-slate-400'
+                    }`}
                 >
                   Spa
                 </button>
