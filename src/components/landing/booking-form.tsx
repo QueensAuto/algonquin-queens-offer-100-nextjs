@@ -228,6 +228,21 @@ export default function BookingForm() {
       thankYouUrl.searchParams.set('vehicle', result.bookingDetails.vehicle);
       thankYouUrl.searchParams.set('appointment', result.bookingDetails.appointment);
 
+      // Trigger GTM event
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          'event': 'generate_lead',
+          'lead_type': 'booking_form',
+          'user_data': {
+            'email': data.email,
+            'address': {
+              'first_name': data['first-name'],
+              'last_name': data['last-name']
+            }
+          }
+        });
+      }
+
       router.push(thankYouUrl.toString());
 
     } else {
