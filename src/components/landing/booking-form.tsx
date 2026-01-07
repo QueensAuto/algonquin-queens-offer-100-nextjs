@@ -235,6 +235,7 @@ export default function BookingForm() {
           'lead_type': 'booking_form',
           'user_data': {
             'email': data.email,
+            'phone_number': data['mobile-number'],
             'address': {
               'first_name': data['first-name'],
               'last_name': data['last-name']
